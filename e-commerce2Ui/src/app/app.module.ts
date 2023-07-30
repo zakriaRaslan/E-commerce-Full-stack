@@ -7,13 +7,19 @@ import { ProductComponent } from './Components/product/product.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SuggestedProductComponent } from './Components/suggested-product/suggested-product.component';
 import { HomeComponent } from './Components/home/home.component';
+import { ProductsComponent } from './Components/products/products.component';
+import { ProductDetailsComponent } from './Components/product-details/product-details.component';
+import { CartComponent } from './Components/cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     SuggestedProductComponent,
-    HomeComponent
+    HomeComponent,
+    ProductsComponent,
+    ProductDetailsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

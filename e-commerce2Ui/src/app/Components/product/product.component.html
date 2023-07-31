@@ -1,3 +1,4 @@
+<!-- Grid View -->
 <div class="grid-view" *ngIf="view == 'grid'">
   <div class="card text-center">
     <div class="card-header fw-bold fs-5 text-success">Header</div>
@@ -8,6 +9,8 @@
         src="assets/Images/Mobiles/10/1.jpg"
         alt="Product Image"
         class="card-img-top"
+        OpenProductDetails
+        [productId]="1"
       />
     </div>
     <div class="card-body">
@@ -30,6 +33,7 @@
   </div>
 </div>
 
+<!-- list View -->
 <div class="list-view" *ngIf="view == 'list'">
   <div class="card">
     <div class="row">
@@ -40,6 +44,8 @@
           src="assets//Images//Mobiles/10/1.jpg"
           alt="Product Image"
           class="img-fluid rounded-start"
+          OpenProductDetails
+          [productId]="1"
         />
       </div>
       <div class="col d-flex flex-column">
@@ -82,6 +88,8 @@
           src="assets//Images/Mobiles/10/1.jpg"
           alt="Item Image"
           class="img-fluid rounded-start"
+          OpenProductDetails
+          [productId]="1"
         />
       </div>
       <div class="col-8">
@@ -115,6 +123,8 @@
         src="assets/Images/Mobiles/10/1.jpg"
         alt="Card Image"
         class="card-img-top"
+        OpenProductDetails
+        [productId]="1"
       />
     </div>
     <div class="card-body">

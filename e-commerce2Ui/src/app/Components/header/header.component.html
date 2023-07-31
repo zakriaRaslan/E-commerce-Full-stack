@@ -1,0 +1,45 @@
+
+<header class="w-100 h-100 bg-dark px-4 d-flex justify-content-between align-items-center">
+<div class="fs-2 text-light fw-bold fst-italic">
+  <span (click)="Home()" [style.cursor]="'pointer'">Raslan</span>
+</div>
+<div class="btn-toolbar" role="toolbar">
+  <div class="btn-group btn-group-ls me-3" role="group">
+    <button type="button" class="btn btn-outline-light" routerLink="/home">
+      Home
+    </button>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+      Category
+      </button>
+      <ul class="dropdown-menu fs-5">
+        <ng-container *ngFor="let item of navigationList; let i = index">
+          <li class="text-center fw-bold">
+            {{item.category | titlecase}}
+          </li>
+          <li *ngFor="let subCategory of item.subCategory" [style.cursor]="'pointer'">
+            <a class="dropdown-item" OpenProducts [category]="{
+              id:0,
+              category:item.category,
+              subcategory:subCategory
+            }">
+              {{subCategory | titlecase}}
+            </a>
+          </li>
+           <li *ngIf="i != navigationList.length-1">
+            <hr class="dropdown-divider">
+           </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+  <div class="btn-group btn-group-lg me-2" role="group">
+    <button type="button" class="btn btn-outline-light">Login</button>
+    <button type="button" class="btn btn-outline-light">Register</button>
+    <button type="button" class="btn btn-outline-light">Account</button>
+    <button type="button" class="btn btn-outline-light" routerLink="/cart">Cart</button>
+    <button type="button" class="btn btn-outline-light" routerLink="/orders">Orders</button>
+    <button type="button" class="btn btn-outline-light">LogOut</button>
+  </div>
+</div>
+</header>

@@ -12,3 +12,4 @@ export interface NavigationItem{
   category:string;
   subCategory:string[];
 }
+

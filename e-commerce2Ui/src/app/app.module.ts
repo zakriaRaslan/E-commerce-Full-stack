@@ -19,6 +19,8 @@ import { OpenProductsDirective } from './Directives/open-products.directive';
 import { OpenProductDetailsDirective } from './Directives/open-product-details.directive';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
+import {  HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { RegisterComponent } from './Components/register/register.component';
     AppRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

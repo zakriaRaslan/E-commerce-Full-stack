@@ -6,11 +6,11 @@
         <img class="w-100" src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/{{imgIndex}}.jpg" alt="Profile image">
       </div>
       <div class="image-thumbnails d-flex justify-content-between align-items-center m-4">
-        <img src="assets/Images/Mobiles/10/1.jpg" (click)="imgIndex=1" alt="Thumbnails Image">
-        <img src="assets/Images/Mobiles/10/2.jpg"(click)="imgIndex=2" alt="Thumbnails Image">
-        <img src="assets/Images/Mobiles/10/3.jpg"(click)="imgIndex=3" alt="Thumbnails Image">
-        <img src="assets/Images/Mobiles/10/4.jpg"(click)="imgIndex=4"alt="Thumbnails Image">
-        <img src="assets/Images/Mobiles/10/5.jpg"(click)="imgIndex=5"alt="Thumbnails Image">
+        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/1.jpg" (click)="imgIndex=1" alt="Thumbnails Image">
+        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/2.jpg"(click)="imgIndex=2" alt="Thumbnails Image">
+        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/3.jpg"(click)="imgIndex=3" alt="Thumbnails Image">
+        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/4.jpg"(click)="imgIndex=4"alt="Thumbnails Image">
+        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/5.jpg"(click)="imgIndex=5"alt="Thumbnails Image">
       </div>
     </div>
     <!-- Details Of Product -->
@@ -30,7 +30,7 @@
         </div>
         <div class="card-body">
           <h6 class="card-subtitle my2 text-primary">
-            11 Product Are Available
+            {{product.quantity}} Product Are Available
           </h6>
           <div class="d-grid gap-2">
             <button type="button" class="btn btn-outline-success">Add To Cart</button>
@@ -41,7 +41,7 @@
             Description
           </h5>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-action" *ngFor="let item of [1,1,1,1,1,1,1]">{{item}}</li>
+            <li class="list-group-item list-group-item-action" *ngFor="let item of product.description.split('. ')">{{item}}</li>
           </ul>
         </div>
       </div>
@@ -68,12 +68,12 @@
       <h4 class="mt-4">
         Write Your Review
       </h4>
-      <textarea class="w-75 p-2"></textarea>
+      <textarea class="w-75 p-2" [formControl]="reviewControl"></textarea>
       <div class="d-flex align-items-start">
-        <button type="button" class="btn btn-outline-primary mt-4 me-5 ">Save Review</button>
+        <button type="button" class="btn btn-outline-primary mt-4 me-5 " (click)="saveReview()">Save Review</button>
         <div>
-          <h6 class="text-danger mt-4">Login First, Then Enter The Review</h6>
-          <h6 class="text-danger">Review Can Not Be Empty!</h6>
+          <h6 class="text-danger mt-4" *ngIf="emptyReviewError">Login First, Then Enter The Review</h6>
+          <h6 class="text-danger" *ngIf="emptyReviewError">Review Can Not Be Empty!</h6>
           <h6 class="text-success">Review Saved Successfully</h6>
         </div>
       </div>

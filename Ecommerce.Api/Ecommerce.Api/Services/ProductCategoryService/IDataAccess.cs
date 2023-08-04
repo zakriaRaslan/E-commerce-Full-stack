@@ -8,6 +8,6 @@ namespace Ecommerce.Api.Services.ProductCategoryService
         ProductCategory GetProductCategoryById(int id);
         Offer GetOffer(int id);
         IEnumerable<Product> GetProducts(string category, string subcategory, int count);
-        Task<Product> GetProductById(int id);
+        Product GetProductById(int id);
     }
 }

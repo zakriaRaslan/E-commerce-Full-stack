@@ -36,7 +36,7 @@ export class NavigationService {
   }
 
   getProductById(id:number){
-    let url = this.baseUrl + "GetProduct" + id;
+    let url = `${this.baseUrl}GetProduct/${id}`
     return this.http.get<Product>(url);
   }
 }

@@ -26,16 +26,20 @@ namespace Ecommerce.Api.Services.ProductCategoryService
 
         public IEnumerable<Product> GetProducts(string category, string subcategory, int count)
         {
-            var products = _context.products.Where(x => x.Category.Category == category && x.Category.Subcategory == subcategory).Take(count)
+            var products = _context.products.Where(x => x.Category.Category == category && x.Category.Subcategory == subcategory)
+                .OrderBy(x => Guid.NewGuid()).Take(count)
                 .Include(x => x.Category).Include(x => x.Offer);
 
             return products;
         }
 
-        public async Task<Product> GetProductById(int id)
+        public Product GetProductById(int id)
         {
-            var product = await _context.products.FindAsync(id);
+            var product = _context.products.Where(x => x.ProductId == id)
+                .Include(x => x.Category).Include(x => x.Offer).FirstOrDefault();
             return product;
         }
+
+
     }
 }

@@ -8,11 +8,11 @@ namespace Ecommerce.Api.Controllers
     [ApiController]
     public class ShoppingController : ControllerBase
     {
-        private readonly IProductCategoryServ _productCatServ;
+        private readonly IDataAccess _dataAccess;
 
-        public ShoppingController(IProductCategoryServ productCatServ)
+        public ShoppingController(IDataAccess productCatServ)
         {
-            _productCatServ = productCatServ;
+            _dataAccess = productCatServ;
         }
 
         [HttpGet("product-categorylist")]
@@ -20,9 +20,23 @@ namespace Ecommerce.Api.Controllers
         {
             var ProductCategories = new List<ProductCategory>();
 
-            ProductCategories = _productCatServ.GetProductCategories();
+            ProductCategories = _dataAccess.GetProductCategories();
             return Ok(ProductCategories);
         }
+        [HttpGet("Get-Products")]
+        public IActionResult GetProducts(string category, string subCategory, int count = 1)
+        {
+            if (category == null || subCategory == null) { return BadRequest(new { message = " Category Or SubCategory Can Not Be Null" }); }
+            var products = _dataAccess.GetProducts(category, subCategory, count);
 
+            return Ok(products);
+        }
+        [HttpGet("GetProduct/{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var product = await _dataAccess.GetProductById(id);
+            if (product == null) { return NotFound(new { message = "No Product With This Id" }); }
+            return Ok(product);
+        }
     }
 }

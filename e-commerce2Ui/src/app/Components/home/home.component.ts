@@ -9,25 +9,9 @@ import { SuggestedProduct } from 'src/app/models/model';
 export class HomeComponent {
 suggestedProducts:SuggestedProduct[]=[
   {
-    bannerImage:'Banner/Banner_Chair.png',
-    category:{
-      id:1,
-      category:'Furniture',
-      subcategory:'Chairs'
-    }
-  },
-  {
-    bannerImage:'Banner/Banner_Table.png',
-    category:{
-      id:1,
-      category:'Furniture',
-      subcategory:'Tables'
-    }
-  },
-  {
     bannerImage:'Banner/Banner_Mobile.png',
     category:{
-      id:1,
+      categoryId:1,
       category:'Electronics',
       subcategory:'Mobiles'
     }
@@ -35,9 +19,25 @@ suggestedProducts:SuggestedProduct[]=[
   {
     bannerImage:'Banner/Banner_Laptop.png',
     category:{
-      id:1,
+      categoryId:1,
       category:'Electronics',
       subcategory:'Laptops'
+    }
+  },
+  {
+    bannerImage:'Banner/Banner_Chair.png',
+    category:{
+      categoryId:1,
+      category:'Furniture',
+      subcategory:'Chairs'
+    }
+  },
+  {
+    bannerImage:'Banner/Banner_Table.png',
+    category:{
+      categoryId:1,
+      category:'Furniture',
+      subcategory:'Tables'
     }
   },
 ]

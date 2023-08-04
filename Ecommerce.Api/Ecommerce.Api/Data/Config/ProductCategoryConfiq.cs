@@ -8,10 +8,10 @@ namespace Ecommerce.Api.Data.Config
     {
         public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.CategoryId);
             builder.ToTable("ProductCategories");
             builder.Property(x => x.Category).IsRequired().HasMaxLength(25);
-            builder.Property(x => x.SubCategory).HasMaxLength(25);
+            builder.Property(x => x.Subcategory).HasMaxLength(25);
         }
     }
 }

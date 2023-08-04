@@ -6,25 +6,25 @@
       class="overflow-hidden d-flex justify-content-center align-items-center"
     >
       <img
-        src="assets/Images/Mobiles/10/1.jpg"
+        src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/1.jpg"
         alt="Product Image"
         class="card-img-top"
         OpenProductDetails
-        [productId]="1"
+        [productId]="product.productId"
       />
     </div>
     <div class="card-body">
-      <h5 class="card-title title">Title</h5>
-      <h6 class="card-subtitle my-2 text-primary">12 Products Are Available</h6>
-      <p class="card-text description">Description</p>
+      <h5 class="card-title title">{{product.title}}</h5>
+      <h6 class="card-subtitle my-2 text-primary">{{product.quantity}} Products Are Available</h6>
+      <p class="card-text description">{{product.description}}</p>
     </div>
     <div class="card-body">
       <h5 class="card-title text-success">
-        Final Price
-        <span class="text-primary">-20%</span>
+        {{utilityService.applyDiscount(product.price,product.offer.discount) | currency:'EGP'}}
+        <span class="text-primary">-{{product.offer.discount}}%</span>
       </h5>
       <h6 class="card-subtitle text-danger text-decoration-line-through">
-        Original Price
+        {{product.price | currency:'EGY'}}
       </h6>
     </div>
     <div class="card-footer d-grid gap-2">
@@ -41,30 +41,30 @@
         class="col-md-4 overflow-hidden d-flex justify-content center align-items-center"
       >
         <img
-          src="assets//Images//Mobiles/10/1.jpg"
+        src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/1.jpg"
           alt="Product Image"
           class="img-fluid rounded-start"
           OpenProductDetails
-          [productId]="1"
+          [productId]="product.productId"
         />
       </div>
       <div class="col d-flex flex-column">
         <div class="card-header text-success text-center">Header</div>
         <div class="card-body">
-          <h5 class="card-title title">Title</h5>
-          <p class="card-text description">Description</p>
+          <h5 class="card-title title">{{product.title}}</h5>
+          <p class="card-text description">{{product.description}}</p>
           <h6 class="card-subtitle mb-3 text-primary">
-            11 Product Are Available
+            {{product.quantity}} Product Are Available
           </h6>
         </div>
         <div class="card-body">
           <h4 class="card-title text-muted">Pricing</h4>
           <h2 class="card-title text-success">
-            Final Price
-            <span class="text-primary">-20%</span>
+            {{utilityService.applyDiscount(product.price,product.offer.discount) | currency:'EGY'}}
+            <span class="text-primary">-{{product.offer.discount}}%</span>
           </h2>
           <h5 class="card-subtitle text-danger text-decoration-line-through">
-            Original Price
+            {{product.price | currency:'EGY'}}
           </h5>
         </div>
         <div class="card-footer text-muted d-grid gap-2">
@@ -85,22 +85,22 @@
         class="col-4 overflow-hidden d-flex justify-content-center align-items-center"
       >
         <img
-          src="assets//Images/Mobiles/10/1.jpg"
+          src="assets//Images/{{product.category.subcategory}}/{{product.productId}}/1.jpg"
           alt="Item Image"
           class="img-fluid rounded-start"
           OpenProductDetails
-          [productId]="1"
+          [productId]="product.productId"
         />
       </div>
       <div class="col-8">
         <div class="card-body">
-          <h5 class="card-title title">Title</h5>
+          <h5 class="card-title title">{{product.title}}</h5>
           <h5 class="card-title text-success">
-            Final Price
+            {{utilityService.applyDiscount(product.price,product.offer.discount) | currency:'EGY'}}
             <span class="text-primary">11 Product Are Available</span>
           </h5>
           <h6 class="card-subtitle text-danger text-decoration-line-through">
-            Original Price
+            {{product.price | currency:'EGY'}}
           </h6>
         </div>
         <div class="card-footer text-muted d-grid gap-2">
@@ -120,15 +120,15 @@
       class="overflow-hidden d-flex justify-content-center align-items-center"
     >
       <img
-        src="assets/Images/Mobiles/10/1.jpg"
+        src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/1.jpg"
         alt="Card Image"
         class="card-img-top"
         OpenProductDetails
-        [productId]="1"
+        [productId]="product.productId"
       />
     </div>
     <div class="card-body">
-      <h5 class="card-title title">Title</h5>
+      <h5 class="card-title title">{{product.title}}</h5>
     </div>
   </div>
 </div>

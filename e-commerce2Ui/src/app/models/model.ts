@@ -1,5 +1,5 @@
 export interface Category{
-  id:number;
+  categoryId:number;
   category:string;
   subcategory:string
 }
@@ -13,3 +13,19 @@ export interface NavigationItem{
   subCategory:string[];
 }
 
+export interface Offer{
+  offerId:number;
+  title:string;
+  discount:number;
+}
+
+export interface Product{
+  productId:number;
+  title:string;
+  description:string;
+  price:number;
+  quantity:number;
+  imageName:string;
+  offer:Offer;
+  category:Category;
+}

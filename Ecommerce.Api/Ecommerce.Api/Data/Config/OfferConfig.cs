@@ -8,7 +8,7 @@ namespace Ecommerce.Api.Data.Config
     {
         public void Configure(EntityTypeBuilder<Offer> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.OfferId);
             builder.ToTable("Offers");
             builder.Property(x => x.Title).IsRequired().HasMaxLength(25);
 

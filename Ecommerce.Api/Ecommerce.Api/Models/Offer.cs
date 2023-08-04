@@ -2,9 +2,9 @@
 {
     public class Offer
     {
-        public int Id { get; set; }
+        public int OfferId { get; set; }
         public string Title { get; set; } = "";
-        public int Descount { get; set; } = 0;
+        public int Discount { get; set; } = 0;
 
     }
 }

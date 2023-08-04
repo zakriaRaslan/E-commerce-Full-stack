@@ -23,19 +23,19 @@
               {{ item.category | titlecase }}
             </li>
             <li
-              *ngFor="let subCategory of item.subCategory"
+              *ngFor="let subcategory of item.subCategory"
               [style.cursor]="'pointer'"
             >
               <a
                 class="dropdown-item"
                 OpenProducts
                 [category]="{
-                  id: 0,
-                  category: item.category,
-                  subcategory: subCategory
+                  categoryId: 0,
+                  'category': item.category,
+                  'subcategory': subcategory
                 }"
               >
-                {{ subCategory | titlecase }}
+                {{ subcategory | titlecase }}
               </a>
             </li>
             <li *ngIf="i != navigationList.length - 1">

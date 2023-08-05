@@ -76,3 +76,9 @@ D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.Extensions.Options.dll

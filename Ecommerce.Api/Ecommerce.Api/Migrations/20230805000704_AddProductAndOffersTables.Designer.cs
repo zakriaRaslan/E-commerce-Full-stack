@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230802234936_AlterTitleAndDescriptionCoulmsInProductTable")]
-    partial class AlterTitleAndDescriptionCoulmsInProductTable
+    [Migration("20230805000704_AddProductAndOffersTables")]
+    partial class AddProductAndOffersTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,7 +98,7 @@ namespace Ecommerce.Api.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<string>("SubCategory")
+                    b.Property<string>("Subcategory")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");

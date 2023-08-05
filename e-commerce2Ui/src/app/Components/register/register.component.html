@@ -62,10 +62,29 @@
       </div>
     </div>
   </div>
+  <!-- UserName -->
+  <div class="mb-3">
+    <label for="userName" class="form-label">UserName</label>
+    <input
+      type="text"
+      class="form-control"
+      id="userName"
+      name="UserName"
+      formControlName="userName"
+      placeholder="UserName"
+    />
+
+    <!-- Errors -->
+    <div
+      class="text-danger form-text"
+      *ngIf="UserName.errors?.['required'] &&(UserName.dirty || UserName.touched)"
+    >
+      UserName Is Required
+    </div>
+  </div>
   <!-- Email -->
   <div class="mb-3">
     <label for="Email" class="form-label">Email</label>
-    <!-- Errors -->
     <input
       type="email"
       class="form-control"
@@ -74,6 +93,7 @@
       placeholder="Enter Email"
       formControlName="email"
     />
+    <!-- Errors -->
     <div
       class="form-text text-danger"
       *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)"
@@ -87,25 +107,95 @@
       Email Is Invalid.
     </div>
   </div>
+  <!-- Address -->
+  <div class="mb-3">
+    <label for="address" class="form-label">Address</label>
+    <input
+      type="text"
+      id="address"
+      class="form-control"
+      name="address"
+      formControlName="address"
+      placeholder="Your Address"
+    />
+    <div
+      class="form-text text-danger"
+      *ngIf="Address.errors?.['required'] && (Address.dirty || Address.touched)"
+    >
+      Address Is Required
+    </div>
+  </div>
+  <!-- MobileNumber -->
+  <div class="mb-3">
+    <label for="mobile" class="form-label">Mobile Number</label>
+    <input
+      type="text"
+      id="mobile"
+      class="form-control"
+      name="address"
+      formControlName="mobile"
+      placeholder="Mobile Number"
+      maxlength="15"
+    />
+    <div
+      class="form-text text-danger"
+      *ngIf="Mobile.errors?.['required'] && (Mobile.dirty || Mobile.touched)"
+    >
+      Mobile Number Is Required
+    </div>
+    <div
+      class="form-text text-danger"
+      *ngIf="Mobile.errors?.['pattern'] && (Mobile.dirty || Mobile.touched)"
+    >
+     Invalid Mobile Number
+    </div>
+    <div
+      class="form-text text-danger"
+      *ngIf="Mobile.errors?.['minlength'] && (Mobile.dirty || Mobile.touched)"
+    >
+      Mobile Number Should be At Least (8) Character
+    </div>
+  </div>
   <!-- Password & ConfirmPassword -->
   <div class="row">
     <div class="col mb-3">
       <label for="Password" class="form-label">Password</label>
+      <fa-icon
+      [icon]="eyeIcon"
+      class="eyeIcon"
+      (click)="togglePassword()"
+      class="ms-3"
+      [style.cursor]="'pointer'"
+    ></fa-icon>
+      <div class="col">
       <input
-        type="password"
+        [type]="passwordType"
         class="form-control"
         id="Password"
         name="Password"
         placeholder="Enter Password"
         formControlName="password"
-        maxlength="15"
+        maxlength="20"
       />
+    </div>
       <!-- Errors -->
       <div
         class="form-text text-danger"
         *ngIf="Password.errors?.['required'] && (Password.dirty || Password.touched)"
       >
         Password Is Required.
+      </div>
+      <div
+        class="form-text text-danger"
+        *ngIf="Password.errors?.['pattern'] && (Password.dirty || Password.touched)"
+      >
+        Password Should Be Alphanumeric And Have A Special Character
+      </div>
+      <div
+        class="form-text text-danger"
+        *ngIf="Password.errors?.['minlength'] && (Password.dirty || Password.touched)"
+      >
+        Password Should Be At least (6) Character
       </div>
       <div
         class="form-text text-danger"
@@ -123,7 +213,7 @@
     <div class="col mb-3">
       <label for="ConfirmPassword" class="form-label">Confirm Password</label>
       <input
-        type="password"
+      [type]="passwordType"
         class="form-control"
         id="ConfirmPassword"
         name="ConfirmPassword"
@@ -131,8 +221,17 @@
         formControlName="confirmPassword"
         maxlength="15"
       />
-      <div class="form-text text-danger" *ngIf="invalidConfirmPassword">
+      <div
+        class="form-text text-danger"
+        *ngIf="ConfirmPassword.errors?.['confirmPassword'] && (ConfirmPassword.dirty ||ConfirmPassword.touched)"
+      >
         Passwords Does Not Match.
+      </div>
+      <div
+        class="form-text text-danger"
+        *ngIf="ConfirmPassword.errors?.['required'] && (ConfirmPassword.dirty ||ConfirmPassword.touched)"
+      >
+        ConfirmPassword Is Required
       </div>
     </div>
   </div>
@@ -147,6 +246,6 @@
     </button>
   </div>
   <div class="mt-3 text-center">
-    <h5 class="text-success">Account Created Successfully</h5>
+    <h5 class="text-success">{{ registerMessage }}</h5>
   </div>
 </form>

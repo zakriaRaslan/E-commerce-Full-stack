@@ -29,3 +29,22 @@ export interface Product{
   offer:Offer;
   category:Category;
 }
+
+export interface User{
+  firstName:string;
+  lastName:string;
+  userName:string;
+  email:string;
+  address:string;
+  mobile:string;
+  password:string;
+}
+
+export interface RegisterResponse{
+  FirstName:string;
+  LastName:string;
+  Email:string;
+  Message:string;
+  IsAuthenticated:boolean;
+  Roles:string[];
+}

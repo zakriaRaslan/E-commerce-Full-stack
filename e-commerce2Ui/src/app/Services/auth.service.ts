@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models/model';
+import { LoginModel, RegisterModel, User } from '../models/model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable({
@@ -8,10 +9,39 @@ import { User } from '../models/model';
 })
 export class AuthService {
 baseUrl:string="https://localhost:7197/api/Auth/"
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private jwt:JwtHelperService) { }
 
-  Register(user:User){
+//To Use JwtHelperService => npm instal @auth0/angular-jwt
+  Register(user:RegisterModel){
     let url = `${this.baseUrl}register`
     return this.http.post(url,user);
   }
-}
+  login(user:LoginModel){
+    let url = `${this.baseUrl}login`;
+    return this.http.post(url,user);
+  }
+  saveToken(token:string){
+    localStorage.setItem('token',token);
+  }
+  IsLoggedIn():boolean{
+    return !!localStorage.getItem('token')
+  }
+  logout(){
+    localStorage.removeItem('token');
+  }
+  GetUser(){
+    let token = this.jwt.decodeToken()
+    let user:User={
+      userId:token.uId,
+      firstName:token.firstName,
+      lastName:token.lastName,
+      userName:token.userName,
+      email:token.email,
+      address:token.address,
+      mobile:token.mobile,
+      password:""
+    }
+    return user
+    }
+  }
+

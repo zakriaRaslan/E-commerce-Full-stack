@@ -82,3 +82,6 @@ D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Ecommerce.Api.staticwebassets.runtime.json
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.UI.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.Extensions.FileProviders.Embedded.dll

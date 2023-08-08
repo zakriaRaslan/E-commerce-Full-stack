@@ -31,6 +31,16 @@ export interface Product{
 }
 
 export interface User{
+  userId:string;
+  firstName:string;
+  lastName:string;
+  userName:string;
+  email:string;
+  address:string;
+  mobile:string;
+  password:string;
+}
+export interface RegisterModel{
   firstName:string;
   lastName:string;
   userName:string;
@@ -47,4 +57,28 @@ export interface RegisterResponse{
   Message:string;
   IsAuthenticated:boolean;
   Roles:string[];
+}
+export interface LoginModel{
+  email:string;
+  password:string;
+}
+
+export interface Review{
+  userId:string;
+  productId:number;
+  reviewValue:string;
+}
+
+export interface ShowReview{
+  userName:string;
+  reviewContent:string;
+  createdAt:string;
+}
+
+export interface reviewResponse{
+  id:number;
+  user:User;
+  product:Product;
+  value:string;
+  createdAt:string;
 }

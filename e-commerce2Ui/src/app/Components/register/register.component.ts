@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/Custom Validators/confirm-password.validator';
 import { AuthService } from 'src/app/Services/auth.service';
-import { User } from 'src/app/models/model';
+import { RegisterModel, User } from 'src/app/models/model';
 import{faEye,faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    let user: User = {
+    let user: RegisterModel = {
       firstName: this.FirstName.value,
       lastName: this.LastName.value,
       userName: this.UserName.value,

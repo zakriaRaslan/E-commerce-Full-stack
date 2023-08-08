@@ -3,96 +3,171 @@
     <!-- Profile Image -->
     <div class="col-4">
       <div class="d-flex justify-content-center align-items-center m-4">
-        <img class="w-100" src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/{{imgIndex}}.jpg" alt="Profile image">
+        <img
+          class="w-100"
+          src="assets/Images/{{ product.category.subcategory }}/{{
+            product.productId
+          }}/{{ imgIndex }}.jpg"
+          alt="Profile image"
+        />
       </div>
-      <div class="image-thumbnails d-flex justify-content-between align-items-center m-4">
-        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/1.jpg" (click)="imgIndex=1" alt="Thumbnails Image">
-        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/2.jpg"(click)="imgIndex=2" alt="Thumbnails Image">
-        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/3.jpg"(click)="imgIndex=3" alt="Thumbnails Image">
-        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/4.jpg"(click)="imgIndex=4"alt="Thumbnails Image">
-        <img src="assets/Images/{{product.category.subcategory}}/{{product.productId}}/5.jpg"(click)="imgIndex=5"alt="Thumbnails Image">
+      <div
+        class="image-thumbnails d-flex justify-content-between align-items-center m-4"
+      >
+        <img
+          src="assets/Images/{{ product.category.subcategory }}/{{
+            product.productId
+          }}/1.jpg"
+          (click)="imgIndex = 1"
+          alt="Thumbnails Image"
+        />
+        <img
+          src="assets/Images/{{ product.category.subcategory }}/{{
+            product.productId
+          }}/2.jpg"
+          (click)="imgIndex = 2"
+          alt="Thumbnails Image"
+        />
+        <img
+          src="assets/Images/{{ product.category.subcategory }}/{{
+            product.productId
+          }}/3.jpg"
+          (click)="imgIndex = 3"
+          alt="Thumbnails Image"
+        />
+        <img
+          src="assets/Images/{{ product.category.subcategory }}/{{
+            product.productId
+          }}/4.jpg"
+          (click)="imgIndex = 4"
+          alt="Thumbnails Image"
+        />
+        <img
+          src="assets/Images/{{ product.category.subcategory }}/{{
+            product.productId
+          }}/5.jpg"
+          (click)="imgIndex = 5"
+          alt="Thumbnails Image"
+        />
       </div>
     </div>
     <!-- Details Of Product -->
     <div class="col-8">
       <div class="card">
         <div class="card-header">
-          <h2 class="text-center">{{product.title}}</h2>
+          <h2 class="text-center">{{ product.title }}</h2>
         </div>
         <div class="card-body">
           <h1 class="card-title text-success">
-            {{this.utilityService.applyDiscount(product.price,product.offer.discount) | currency:'EGY'}}
-            <span class="text-primary">-{{product.offer.discount}}%</span>
+            {{
+              this.utilityService.applyDiscount(
+                product.price,
+                product.offer.discount
+              ) | currency : "EGY"
+            }}
+            <span class="text-primary">-{{ product.offer.discount }}%</span>
           </h1>
           <h4 class="card-subtitle text-danger text-decoration-line-through">
-            {{product.price}}
+            {{ product.price }}
           </h4>
         </div>
         <div class="card-body">
           <h6 class="card-subtitle my2 text-primary">
-            {{product.quantity}} Product Are Available
+            {{ product.quantity }} Product Are Available
           </h6>
           <div class="d-grid gap-2">
-            <button type="button" class="btn btn-outline-success">Add To Cart</button>
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              [disabled]="!this.authService.IsLoggedIn()"
+              (click)="this.cartService.AddToCart(product)"
+            >
+              Add To Cart<span *ngIf="!this.authService.IsLoggedIn()" class="text-danger fw-bold"
+                >(Login First)</span
+              >
+            </button>
           </div>
         </div>
         <div class="card-body">
-          <h5 class="card-text">
-            Description
-          </h5>
+          <h5 class="card-text">Description</h5>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-action" *ngFor="let item of product.description.split('. ')">{{item}}</li>
+            <li
+              class="list-group-item list-group-item-action"
+              *ngFor="let item of product.description.split('. ')"
+            >
+              {{ item }}
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <hr>
+  <hr />
   <!-- Suggested Products -->
   <div class="row g-0">
-<div class="col-12 ps5 pt4 pb3">
-  <h3 class="border border-secondary text-center py-2 my-rounded-corner w-25">
-    Related products
-  </h3>
-</div>
-<div class="col-12">
-  <app-suggested-product [category]="product.category"></app-suggested-product>
-</div>
+    <div class="col-12 ps5 pt4 pb3">
+      <h3
+        class="border border-secondary text-center py-2 my-rounded-corner w-25"
+      >
+        Related products
+      </h3>
+    </div>
+    <div class="col-12">
+      <app-suggested-product
+        [category]="product.category"
+      ></app-suggested-product>
+    </div>
   </div>
-  <hr>
+  <hr />
   <!-- Reviews -->
   <div class="row g-0">
     <!-- User reviews -->
     <div class="col p-3">
       <h3>Give Us Your Reviews</h3>
-      <h4 class="mt-4">
-        Write Your Review
-      </h4>
-      <textarea class="w-75 p-2" [formControl]="reviewControl"></textarea>
+      <h4 class="mt-4">Write Your Review</h4>
+      <textarea
+        class="w-75 p-2"
+        [formControl]="reviewControl"
+        (click)="clearMessages()"
+      ></textarea>
       <div class="d-flex align-items-start">
-        <button type="button" class="btn btn-outline-primary mt-4 me-5 " (click)="saveReview()">Save Review</button>
+        <button
+          type="button"
+          class="btn btn-outline-primary mt-4 me-5"
+          (click)="SaveReview()"
+        >
+          Save Review
+        </button>
         <div>
-          <h6 class="text-danger mt-4" *ngIf="emptyReviewError">Login First, Then Enter The Review</h6>
-          <h6 class="text-danger" *ngIf="emptyReviewError">Review Can Not Be Empty!</h6>
-          <h6 class="text-success">Review Saved Successfully</h6>
+          <h6 class="text-danger mt-4" *ngIf="LoggedInError">
+            Login First, Then Enter The Review
+          </h6>
+          <h6 class="text-danger" *ngIf="emptyReviewError">
+            Review Can Not Be Empty!
+          </h6>
+          <h6 class="text-success" *ngIf="reviewSaved">
+            Review Saved Successfully
+          </h6>
+          <h6 class="text-danger">{{ errorMessage }}</h6>
         </div>
       </div>
     </div>
     <!-- Other Reviews -->
     <div class="col p-3">
       <h3>Other Reviews</h3>
-      <h6 *ngIf="1">No Review Yet!</h6>
-      <div class="card mt-3" *ngFor="let review of [1,2,3]">
+      <h4 *ngIf="reviews.length == 0">No Reviews Yet!</h4>
+      <div class="card mt-3" *ngFor="let review of reviews">
         <div class="card-header d-flex justify-content-between">
           <div class="card-text">
-            Zakaria Raslan
+            CreatedBy:
+            <span class="fw-bold fs-5">{{ review.user.userName }}</span>
           </div>
           <div class="card-text fst-italic">
-            Review On <span class="fw-bold">{{"20 Jul 2023" | date:"dd-MMM-yyyy"}}</span>
+            Review On <span class="fw-bold">{{ review.createdAt }}</span>
           </div>
         </div>
         <div class="card-body">
-          <div class="card-text">Review</div>
+          <div class="card-text">{{ review.value }}</div>
         </div>
       </div>
     </div>

@@ -47,11 +47,15 @@ namespace Ecommerce.Api.Data
             {
                 entity.ToTable("UserTokens", "Auth");
             });
+            Builder.Entity<Review>(entity =>
+            {
+                entity.ToTable("Reviews");
+            });
         }
         public DbSet<Product> products { get; set; }
         public DbSet<ProductCategory> productCategories { get; set; }
         public DbSet<Offer> Offers { get; set; }
-
+        public DbSet<Review> Reviews { get; set; }
 
     }
 }

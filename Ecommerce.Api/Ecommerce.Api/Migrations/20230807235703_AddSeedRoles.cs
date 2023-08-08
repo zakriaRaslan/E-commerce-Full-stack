@@ -17,17 +17,17 @@ namespace Ecommerce.Api.Migrations
                 values: new object[] { Guid.NewGuid().ToString(), "User", "User".ToUpper(), Guid.NewGuid().ToString() }
                 );
             migrationBuilder.InsertData(
-               table: "Role",
-               schema: "Auth",
-               columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
-               values: new object[] { Guid.NewGuid().ToString(), "Admin", "Admin".ToUpper(), Guid.NewGuid().ToString() }
-               );
+            table: "Role",
+            schema: "Auth",
+            columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
+            values: new object[] { Guid.NewGuid().ToString(), "Admin", "Admin".ToUpper(), Guid.NewGuid().ToString() }
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DELETE FROM [Auth.Role]");
+            migrationBuilder.Sql("Delete From Auth.Role");
         }
     }
 }

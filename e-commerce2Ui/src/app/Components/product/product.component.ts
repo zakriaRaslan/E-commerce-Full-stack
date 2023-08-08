@@ -1,4 +1,6 @@
 import { Component,Input } from '@angular/core';
+import { AuthService } from 'src/app/Services/auth.service';
+import { CartService } from 'src/app/Services/cart.service';
 import { UtilityService } from 'src/app/Services/utility.service';
 import { Product } from 'src/app/models/model';
 
@@ -27,5 +29,5 @@ export class ProductComponent {
       subcategory:''
     }
 }
-constructor(public utilityService:UtilityService){}
+constructor(public utilityService:UtilityService,public authService:AuthService,public cartService:CartService){}
 }

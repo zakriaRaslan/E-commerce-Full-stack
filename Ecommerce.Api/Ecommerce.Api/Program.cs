@@ -1,9 +1,15 @@
 using Ecommerce.Api.Data;
+using Ecommerce.Api.Helpers;
 using Ecommerce.Api.Models;
 using Ecommerce.Api.Services.AuthService;
+using Ecommerce.Api.Services.CartService;
 using Ecommerce.Api.Services.ProductCategoryService;
+using Ecommerce.Api.Services.ReviewService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,16 +19,42 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
     {
-        policy.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+        policy.WithOrigins("http://localhost:4200/")
+        .AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
     });
 });
+builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.RequireHttpsMetadata = false;
+    o.SaveToken = false;
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<IDataAccess, DataAccess>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -16,7 +16,6 @@ namespace Ecommerce.Api.Models
         [MaxLength(50)]
         public string CreatedAt { get; set; }
         [MaxLength(50)]
-        public string? ModifiedAt { get; set; }
-
+        public string ModifiedAt { get; set; } = string.Empty;
     }
 }

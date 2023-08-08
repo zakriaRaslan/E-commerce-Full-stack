@@ -20,6 +20,8 @@ import { OpenProductDetailsDirective } from './Directives/open-product-details.d
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import {  HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+
 
 
 
@@ -41,13 +43,22 @@ import {  HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
 
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter : () =>{
+          return localStorage.getItem('token');
+        },
+        allowedDomains:['https://localhost:7197/']
+      }
+    })
 
   ],
   providers: [],

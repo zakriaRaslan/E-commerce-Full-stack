@@ -32,7 +32,7 @@ namespace Ecommerce.Api.Controllers
             return Ok(products);
         }
         [HttpGet("GetProduct/{id}")]
-        public async Task<IActionResult> GetProductById(int id)
+        public IActionResult GetProductById(int id)
         {
             var product = _dataAccess.GetProductById(id);
             if (product == null) { return NotFound(new { message = "No Product With This Id" }); }

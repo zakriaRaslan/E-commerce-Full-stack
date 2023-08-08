@@ -11,6 +11,8 @@ import { Category, NavigationItem } from 'src/app/models/model';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { NavigationService } from 'src/app/Services/navigation.service';
+import { AuthService } from 'src/app/Services/auth.service';
+import { CartService } from 'src/app/Services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -19,12 +21,14 @@ import { NavigationService } from 'src/app/Services/navigation.service';
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('modalTitle') modalTitle!: ElementRef;
-  @ViewChild('container', { read: ViewContainerRef, static: true })
-  container!: ViewContainerRef;
+  @ViewChild('container', { read: ViewContainerRef, static: true })  container!: ViewContainerRef;
   navigationList: NavigationItem[] = [];
+  cartItems : number = 0 ;
   constructor(
     private router: Router,
-    private navigationServ: NavigationService
+    private navigationServ: NavigationService,
+    public authService: AuthService,
+    private cartService:CartService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,9 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+    this.cartService.changeCart.subscribe((res:any)=>{
+      this.cartItems += parseInt(res);
+    })
   }
 
   Home() {
@@ -63,5 +70,8 @@ export class HeaderComponent implements OnInit {
       this.modalTitle.nativeElement.textContent = 'Enter Register Information';
       this.container.createComponent(componentType);
     }
+  }
+  LogOut() {
+    this.authService.logout();
   }
 }

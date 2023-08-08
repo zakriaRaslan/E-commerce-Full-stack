@@ -39,7 +39,6 @@ namespace Ecommerce.Api.Services.ProductCategoryService
                 .Include(x => x.Category).Include(x => x.Offer).FirstOrDefault();
             return product;
         }
-
-
     }
+
 }

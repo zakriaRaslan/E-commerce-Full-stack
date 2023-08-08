@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230805223516_AddSeedRoles")]
+    [Migration("20230807235703_AddSeedRoles")]
     partial class AddSeedRoles
     {
         /// <inheritdoc />
@@ -34,7 +34,6 @@ namespace Ecommerce.Api.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -43,7 +42,6 @@ namespace Ecommerce.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedAt")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -56,12 +54,10 @@ namespace Ecommerce.Api.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -72,7 +68,6 @@ namespace Ecommerce.Api.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Mobile")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -149,7 +144,7 @@ namespace Ecommerce.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -159,7 +154,7 @@ namespace Ecommerce.Api.Migrations
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OfferId")
+                    b.Property<int?>("OfferId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -195,13 +190,44 @@ namespace Ecommerce.Api.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Subcategory")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
                     b.HasKey("CategoryId");
 
                     b.ToTable("ProductCategories", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -341,19 +367,34 @@ namespace Ecommerce.Api.Migrations
                 {
                     b.HasOne("Ecommerce.Api.Models.ProductCategory", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Ecommerce.Api.Models.Offer", "Offer")
                         .WithMany()
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OfferId");
 
                     b.Navigation("Category");
 
                     b.Navigation("Offer");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Review", b =>
+                {
+                    b.HasOne("Ecommerce.Api.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Api.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

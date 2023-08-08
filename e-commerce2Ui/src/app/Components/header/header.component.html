@@ -52,6 +52,7 @@
         data-bs-toggle="modal"
         data-bs-target="#generalModal"
         (click)="OpenModal('login')"
+        *ngIf="!this.authService.IsLoggedIn()"
       >
         Login
       </button>
@@ -61,17 +62,18 @@
         data-bs-toggle="modal"
         data-bs-target="#generalModal"
         (click)="OpenModal('register')"
+        *ngIf="!this.authService.IsLoggedIn()"
       >
         Register
       </button>
-      <button type="button" class="btn btn-outline-light">Account</button>
-      <button type="button" class="btn btn-outline-light" routerLink="/cart">
-        Cart
+      <button type="button" class="btn btn-outline-light" *ngIf="this.authService.IsLoggedIn()">Account</button>
+      <button type="button" class="btn btn-outline-light" routerLink="/cart" *ngIf="this.authService.IsLoggedIn()" >
+        Cart <span class="badge bg-warning text-dark">{{cartItems}}</span>
       </button>
-      <button type="button" class="btn btn-outline-light" routerLink="/orders">
+      <button type="button" class="btn btn-outline-light" routerLink="/orders" *ngIf="this.authService.IsLoggedIn()" >
         Orders</button
       >z
-      <button type="button" class="btn btn-outline-light">LogOut</button>
+      <button type="button" class="btn btn-outline-light" (click)="LogOut()" *ngIf="this.authService.IsLoggedIn()">LogOut</button>
     </div>
   </div>
 </header>

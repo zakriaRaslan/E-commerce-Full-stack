@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 import { NavigationService } from 'src/app/Services/navigation.service';
 import { UtilityService } from 'src/app/Services/utility.service';
 import { Product } from 'src/app/models/model';
@@ -16,7 +17,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private navigationService: NavigationService,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
   ) {}
 
   ngOnInit(): void {

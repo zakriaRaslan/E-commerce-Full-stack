@@ -56,6 +56,9 @@ namespace Ecommerce.Api.Data
         public DbSet<ProductCategory> productCategories { get; set; }
         public DbSet<Offer> Offers { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Cart> ShoppingCart { get; set; }
+        public DbSet<CartItems> CartItems { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
 
     }
 }

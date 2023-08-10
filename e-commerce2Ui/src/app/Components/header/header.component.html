@@ -70,7 +70,7 @@
       <button type="button" class="btn btn-outline-light" routerLink="/cart" *ngIf="this.authService.IsLoggedIn()" >
         Cart <span class="badge bg-warning text-dark">{{cartItems}}</span>
       </button>
-      <button type="button" class="btn btn-outline-light" routerLink="/orders" *ngIf="this.authService.IsLoggedIn()" >
+      <button type="button" class="btn btn-outline-light" routerLink="/order" *ngIf="this.authService.IsLoggedIn()" >
         Orders</button
       >z
       <button type="button" class="btn btn-outline-light" (click)="LogOut()" *ngIf="this.authService.IsLoggedIn()">LogOut</button>

@@ -1,4 +1,5 @@
 <div class="my-container mx-auto">
+  <!-- Payment Info -->
   <section class="m-3 p-4 border border-dark my-rounded-corner">
     <h4 class="w-25 border border-primary text-center py-2 my-rounded-corner">
       Payment Info
@@ -7,76 +8,110 @@
       <tbody>
         <tr>
           <td>Items</td>
-          <td class="fs-5 fw-bold">5</td>
+          <td class="fs-5 fw-bold">{{ itemsCount }}</td>
         </tr>
         <tr>
           <td>Total Price</td>
-          <td class="fs-5 fw-bold text-danger">10000</td>
+          <td class="fs-5 fw-bold text-danger">
+            {{ userPaymentInfo.totalAmount | currency : "EGY" }}
+          </td>
         </tr>
         <tr>
           <td>Shipping Charges</td>
-          <td class="fs-5 fw-bold text-danger">1000</td>
+          <td class="fs-5 fw-bold text-danger">
+            {{ userPaymentInfo.shippingCharges | currency : "EGY" }}
+          </td>
         </tr>
         <tr>
           <td>Discount</td>
-          <td class="fs-5 fw-bold text-success">200</td>
+          <td class="fs-5 fw-bold text-success">
+            {{ userPaymentInfo.amountReduce | currency : "EGY" }}
+          </td>
         </tr>
         <tr>
           <td>You Have To Pay</td>
-          <td class="fs-5 fw-bold text-success">10800</td>
+          <td class="fs-5 fw-bold text-success">
+            {{ userPaymentInfo.amountPaid | currency : "EGY" }}
+          </td>
         </tr>
       </tbody>
     </table>
   </section>
+  <!-- Payment Methods -->
   <section class="m-3 p-4 border border-dark my-rounded-corner">
-    <h4 class="w-25 border border-primary text-center py-2 my-rounded-corner">Payment Method</h4>
+    <h4 class="w-25 border border-primary text-center py-2 my-rounded-corner">
+      Payment Method
+    </h4>
     <div class="d-flex justify-content-center align-items-center">
       <h5 class="me-5">Select Any Method</h5>
-      <select  class="form-select w-25" [formControl]="selectedPaymentMethod">
+      <select class="form-select w-25" [formControl]="selectedPaymentMethod">
         <option value="0">Select Any Payment Method</option>
-        <option *ngFor="let paymentMethod of [1,2,3]" value="{{paymentMethod}}">{{paymentMethod}}</option>
+        <option
+          *ngFor="let paymentMethod of paymentMethods"
+          value="{{ paymentMethod.id }}"
+        >
+          {{ paymentMethod.type }}
+          <span *ngIf="paymentMethod.provider != ''">
+            - {{ paymentMethod.provider }}</span
+          >
+        </option>
       </select>
     </div>
   </section>
-<section class="border border-dark m-3 p-4 my-rounded-corner">
-  <h4 class="w-25 text-center border border-primary my-rounded-corner py-2">
-    Proceed To Payments
-  </h4>
-  <div class="mt-4 w-50" *ngIf="selectPaymentMethodName!=''">
-    <table class="table table-bordered my-shadow">
-      <thead>
-        <tr>
-          <td>You Have To Pay</td>
-          <td>10500</td>
-        </tr>
-        <tr>
-          <td>Payment Method</td>
-          <td>UPI-PhonePay</td>
-        </tr>
-        <tr>
-          <td>Address</td>
-          <td *ngIf="true">My Address Will Go Here! <a routerLink="/account-settings">Change</a></td>
-          <td *ngIf="!true">You Have Not Entered Address. <a routerLink="/account-settings">Please Enter That.</a></td>
-        </tr>
-        <tr>
-          <td>Phone Number</td>
-          <td *ngIf="true">0123456789 <a routerLink="/account-settings">Change</a></td>
-          <td *ngIf="!true">You Have Not Entered Phone Number.<a routerLink="/account-settings">Please Enter That.</a></td>
-        </tr>
-      </thead>
-    </table>
-    <div class="d-grid w-50">
-      <button type="button" class="btn btn-outline-success mb-4">Pay</button>
+  <!-- Payment Details -->
+  <section class="border border-dark m-3 p-4 my-rounded-corner">
+    <h4 class="w-25 text-center border border-primary my-rounded-corner py-2">
+      Proceed To Payments
+    </h4>
+    <!-- Payment details -->
+    <div class="mt-4 w-50" *ngIf="selectPaymentMethodValue != ''">
+      <table class="table table-bordered my-shadow">
+        <thead>
+          <tr>
+            <td>You Have To Pay</td>
+            <td>{{ userPaymentInfo.amountPaid | currency:'EGY'}}</td>
+          </tr>
+          <tr>
+            <td>Payment Method</td>
+            <td>{{ this.getPaymentMethod(selectPaymentMethodValue) }}</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td *ngIf="activeUser.address != ''">{{ activeUser.address }}</td>
+            <td *ngIf="activeUser.address == ''">
+              You Have Not Entered Address.
+              <a
+                class="ms-2 btn btn-primary btn-sm"
+                routerLink="/account-settings"
+                >Please Enter That.</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>Phone Number</td>
+            <td *ngIf="activeUser.mobile != ''">{{ activeUser.mobile }}</td>
+            <td *ngIf="activeUser.mobile == ''">
+              You Have Not Entered Phone Number.<a
+                class="ms-2 btn btn-primary btn-sm"
+                routerLink="/account-settings"
+                >Please Enter That.</a
+              >
+            </td>
+          </tr>
+        </thead>
+      </table>
+      <div class="d-grid w-50">
+        <button type="button" class="btn btn-outline-success mb-4" (click)="placeOrder()">Pay</button>
+      </div>
+      <div class="proccessing">
+        <div class="spinner-border me-4" role="status" *ngIf="displaySpinner">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <h6 class="m-0 {{paymentMessageClass}}">{{paymentMessage}}</h6>
+      </div>
     </div>
-    <div class="proccessing">
-    <div class="spinner-border me-4" role="status" *ngIf="true">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <h6 class="m-0">Error</h6>
+  </section>
+  <div class="pt-4" *ngIf="!this.authService.IsLoggedIn()">
+    <h2>You Have Not Logged In</h2>
   </div>
-</div>
-</section>
-<div class="pt-4" *ngIf="!false">
-  <h2>You Have Not Logged In</h2>
-</div>
 </div>

@@ -33,12 +33,12 @@ baseUrl:string="https://localhost:7197/api/Auth/"
     let token = this.jwt.decodeToken()
     let user:User={
       userId:token.uId,
-      firstName:token.firstName,
-      lastName:token.lastName,
-      userName:token.userName,
+      firstName:token.name,
+      lastName:token.family_name,
+      userName:token.sub,
       email:token.email,
-      address:token.address,
-      mobile:token.mobile,
+      address:token.Address,
+      mobile:token.Mobile,
       password:""
     }
     return user

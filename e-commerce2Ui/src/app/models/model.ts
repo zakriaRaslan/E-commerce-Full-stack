@@ -40,6 +40,7 @@ export interface User{
   mobile:string;
   password:string;
 }
+
 export interface RegisterModel{
   firstName:string;
   lastName:string;
@@ -58,6 +59,7 @@ export interface RegisterResponse{
   IsAuthenticated:boolean;
   Roles:string[];
 }
+
 export interface LoginModel{
   email:string;
   password:string;
@@ -82,3 +84,36 @@ export interface reviewResponse{
   value:string;
   createdAt:string;
 }
+
+export interface Cart{
+  id:number;
+  User:User;
+  IsOrdered:boolean;
+  createdDate:Date;
+  cartItems:CartItems[];
+}
+
+export interface CartItems{
+  itemCartId:number;
+  product:Product;
+}
+
+export interface Payment{
+  id:number;
+  user:User;
+  paymentMethod:PaymentMethod;
+  totalAmount:number;
+  shippingCharges:number;
+  amountReduce:number;
+  amountPaid:number;
+  createdAt:string;
+}
+
+export interface PaymentMethod{
+id:number;
+type:string;
+provider:string;
+isAvailable:boolean;
+reason:string;
+}
+

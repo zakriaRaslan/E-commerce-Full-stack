@@ -3,6 +3,7 @@ using Ecommerce.Api.Helpers;
 using Ecommerce.Api.Models;
 using Ecommerce.Api.Services.AuthService;
 using Ecommerce.Api.Services.CartService;
+using Ecommerce.Api.Services.OrderService;
 using Ecommerce.Api.Services.ProductCategoryService;
 using Ecommerce.Api.Services.ReviewService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,11 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
     });
 });
+builder.Services.AddControllers()
+     .AddJsonOptions(options =>
+     {
+         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+     });
 builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -55,6 +62,7 @@ builder.Services.AddScoped<IDataAccess, DataAccess>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

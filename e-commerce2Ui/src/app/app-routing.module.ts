@@ -12,7 +12,7 @@ const routes: Routes = [
   {path:'products',component:ProductsComponent},
   {path:'product-details',component:ProductDetailsComponent},
   {path:'cart',component:CartComponent},
-  {path:'orders',component:OrderComponent},
+  {path:'order',component:OrderComponent},
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'**',component:PageNotFoundComponent}
 ];

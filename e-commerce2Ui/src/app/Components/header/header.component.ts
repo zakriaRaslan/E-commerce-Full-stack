@@ -52,6 +52,11 @@ export class HeaderComponent implements OnInit {
     this.cartService.changeCart.subscribe((res:any)=>{
       this.cartItems += parseInt(res);
     })
+    if(this.authService.IsLoggedIn()){
+      this.cartService.getActiveCart(this.authService.GetUser().userId).subscribe((res)=>{
+        this.cartItems = res.cartItems.length;
+      })
+    }
   }
 
   Home() {

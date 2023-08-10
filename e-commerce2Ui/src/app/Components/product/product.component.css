@@ -40,3 +40,9 @@ max-height: 400px;
   max-height: 50px;
   overflow: hidden;
 }
+
+.cart-item-view .title{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -7,7 +7,7 @@
     >
       <img
         src="assets/Images/{{ product.category.subcategory }}/{{
-          product.productId
+          product.imageName
         }}/1.jpg"
         alt="Product Image"
         class="card-img-top"
@@ -60,7 +60,7 @@
       >
         <img
           src="assets/Images/{{ product.category.subcategory }}/{{
-            product.productId
+            product.imageName
           }}/1.jpg"
           alt="Product Image"
           class="img-fluid rounded-start"
@@ -119,8 +119,8 @@
         class="col-4 overflow-hidden d-flex justify-content-center align-items-center"
       >
         <img
-          src="assets//Images/{{ product.category.subcategory }}/{{
-            product.productId
+          src="assets/Images/{{ product.category.subcategory }}/{{
+            product.imageName
           }}/1.jpg"
           alt="Item Image"
           class="img-fluid rounded-start"
@@ -138,6 +138,7 @@
                 product.offer.discount
               ) | currency : "EGY"
             }}
+            <br>
             <span class="text-primary">11 Product Are Available</span>
           </h5>
           <h6 class="card-subtitle text-danger text-decoration-line-through">
@@ -162,7 +163,7 @@
     >
       <img
         src="assets/Images/{{ product.category.subcategory }}/{{
-          product.productId
+          product.imageName
         }}/1.jpg"
         alt="Card Image"
         class="card-img-top"

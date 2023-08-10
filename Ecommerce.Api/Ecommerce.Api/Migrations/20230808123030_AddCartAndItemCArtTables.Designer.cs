@@ -4,6 +4,7 @@ using Ecommerce.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230808123030_AddCartAndItemCArtTables")]
+    partial class AddCartAndItemCArtTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,35 +181,6 @@ namespace Ecommerce.Api.Migrations
                     b.HasKey("OfferId");
 
                     b.ToTable("Offers", (string)null);
-                });
-
-            modelBuilder.Entity("Ecommerce.Api.Models.PaymentMethod", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Provider")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Reason")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(600)
-                        .HasColumnType("nvarchar(600)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("PaymentMethods");
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.Product", b =>
@@ -448,7 +422,7 @@ namespace Ecommerce.Api.Migrations
             modelBuilder.Entity("Ecommerce.Api.Models.CartItems", b =>
                 {
                     b.HasOne("Ecommerce.Api.Models.Cart", "Cart")
-                        .WithMany("CartItems")
+                        .WithMany("Products")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -551,7 +525,7 @@ namespace Ecommerce.Api.Migrations
 
             modelBuilder.Entity("Ecommerce.Api.Models.Cart", b =>
                 {
-                    b.Navigation("CartItems");
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

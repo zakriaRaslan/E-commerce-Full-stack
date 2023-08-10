@@ -3,29 +3,29 @@
   <h3 class="w-25 border text-center py-2 my-rounded-corner">Current Cart</h3>
   <div class="mt-5">
     <div class="d-grid w-50 mx-auto mb-3">
-      <button type="button" class="btn btn-outline-success fs-4">Order</button>
+      <button type="button" class="btn btn-outline-success fs-4" [routerLink]="'/order'">Order</button>
     </div>
     <table class="table table-hover table-bordered my-shadow w-50 mx-auto">
       <tbody>
         <tr>
           <td>Items</td>
-          <td class="fs-5 fw-bold">5</td>
+          <td class="fs-5 fw-bold">{{cart.cartItems.length}}</td>
         </tr>
         <tr>
           <td>Total Price</td>
-          <td class="fs-5 fw-bold text-danger">10000</td>
+          <td class="fs-5 fw-bold text-danger">{{userPaymentInfo.totalAmount | currency:'EGY'}}</td>
         </tr>
         <tr>
           <td>Shipping Charges</td>
-          <td class="fs-5 fw-bold text-danger">1000</td>
+          <td class="fs-5 fw-bold text-danger">{{userPaymentInfo.shippingCharges | currency:'EGY'}}</td>
         </tr>
         <tr>
           <td>Discount</td>
-          <td class="fs-5 fw-bold text-success">200</td>
+          <td class="fs-5 fw-bold text-success">{{userPaymentInfo.amountReduce | currency:'EGY'}}</td>
         </tr>
         <tr>
           <td>You Have To Pay</td>
-          <td class="fs-5 fw-bold text-success">10800</td>
+          <td class="fs-5 fw-bold text-success">{{userPaymentInfo.amountPaid | currency:'EGY'}}</td>
         </tr>
       </tbody>
     </table>
@@ -33,24 +33,25 @@
   <div class="current-cart-items w-75 mx-auto mt-5">
     <h4>Cart Items</h4>
     <div class="row mt-4 g-0">
-      <div class="col-6 py-3 px-2" *ngFor="let i of [1,1,1,1,1]">
-        <app-product [view]="'currentCartItem'"></app-product>
+      <div class="col-6 py-3 px-2" *ngFor="let cartItem of cart.cartItems">
+        <app-product [view]="'currentCartItem'" [product]="cartItem.product"></app-product>
       </div>
     </div>
   </div>
 </div>
+<!-- Previous User Carts -->
 <div class="mt-5 p-4 border my-rounded-corner">
   <h3 class="w-25 border text-center py-2 mb-5 my-rounded-corner">Previous Carts</h3>
-  <div class="card mb-5" *ngFor="let cart of [1,1,1,1,1]">
+  <div class="card mb-5" *ngFor="let userCart of previousUserCarts">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <span class="time">Order On: <span class="fs-5">22 Mar 2023</span></span>
-      <span class="count">Items:5</span>
-      <span class="price">Price Paid: <span class="fs-5">10000</span></span>
+      <span class="time">Order On: <span class="fs-5">{{userCart.createdDate | date}}</span></span>
+      <span class="count">Items:{{userCart.cartItems.length}}</span>
+      <span class="price">Price Paid: <span class="fs-5">{{utilityService.PriceToPaid(userCart) | currency:'EGY'}}</span></span>
     </div>
     <div class="card-body px-4 py-2">
       <div class="row g-0">
-        <div class="col-2 p-2"*ngFor="let i of [1,1,1,1,1]">
-          <app-product [view]="'prevCartItem'"></app-product>
+        <div class="col-2 p-2" *ngFor="let cartItem of userCart.cartItems">
+          <app-product [view]="'prevCartItem'" [product]="cartItem.product" ></app-product>
         </div>
       </div>
     </div>

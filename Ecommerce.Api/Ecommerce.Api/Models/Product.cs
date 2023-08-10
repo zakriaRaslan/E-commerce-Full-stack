@@ -9,6 +9,6 @@
         public int Quantity { get; set; }
         public string? ImageName { get; set; }
         public Offer Offer { get; set; } = new Offer();
-        public ProductCategory Category { get; set; } = new ProductCategory();
+        public ProductCategory Category { get; set; }
     }
 }

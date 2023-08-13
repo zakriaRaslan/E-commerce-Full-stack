@@ -9,7 +9,7 @@
       <tbody>
         <tr>
           <td>Items</td>
-          <td class="fs-5 fw-bold">{{cart.cartItems.length}}</td>
+          <td class="fs-5 fw-bold">{{totalProductAmount}}</td>
         </tr>
         <tr>
           <td>Total Price</td>
@@ -34,7 +34,7 @@
     <h4>Cart Items</h4>
     <div class="row mt-4 g-0">
       <div class="col-6 py-3 px-2" *ngFor="let cartItem of cart.cartItems">
-        <app-product [view]="'currentCartItem'" [product]="cartItem.product"></app-product>
+        <app-product [view]="'currentCartItem'" [CartProduct]="cartItem.salesProduct"></app-product>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
     <div class="card-body px-4 py-2">
       <div class="row g-0">
         <div class="col-2 p-2" *ngFor="let cartItem of userCart.cartItems">
-          <app-product [view]="'prevCartItem'" [product]="cartItem.product" ></app-product>
+          <app-product [view]="'prevCartItem'" [CartProduct]="cartItem.salesProduct" ></app-product>
         </div>
       </div>
     </div>

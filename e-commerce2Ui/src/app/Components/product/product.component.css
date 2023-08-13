@@ -16,6 +16,12 @@ img{
 img:hover{
   transform: scale(1.05);
 }
+.grid-view{
+  height: fit-content;
+}
+.list-view{
+  height: fit-content;
+}
 
 .grid-view .description,
 .grid-view .title{
@@ -45,4 +51,9 @@ max-height: 400px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.cart-item-view{
+  min-height: 350px;
+  max-height: 400px;
 }

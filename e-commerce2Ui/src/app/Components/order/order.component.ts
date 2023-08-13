@@ -5,7 +5,7 @@ import { Subscription, timer } from 'rxjs';
 import { AuthService } from 'src/app/Services/auth.service';
 import { CartService } from 'src/app/Services/cart.service';
 import { OrderService } from 'src/app/Services/order.service';
-import { Cart, Payment, PaymentMethod, User } from 'src/app/models/model';
+import { Cart, OrderDto, Payment, PaymentMethod, User } from 'src/app/models/model';
 
 @Component({
   selector: 'app-order',
@@ -70,7 +70,9 @@ export class OrderComponent implements OnInit, OnDestroy {
       .getActiveCart(this.activeUser.userId)
       .subscribe((res) => {
         this.userCart = res;
-        this.itemsCount = this.userCart.cartItems.length;
+        for(let cartItems of this.userCart.cartItems){
+          this.itemsCount += cartItems.salesProduct.quantity;
+        }
         // set UserPaymentInfo
         this.cartService.CalculatePayment(this.userCart, this.userPaymentInfo);
       });
@@ -82,6 +84,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   placeOrder() {
+
     this.displaySpinner = true;
     let isPaymentSuccessfully = this.payMoney();
     if (!isPaymentSuccessfully) {
@@ -99,7 +102,7 @@ export class OrderComponent implements OnInit, OnDestroy {
       }
       if (step == 2) {
         this.paymentMessage = 'Payment Successfully.. Order Is Being Placed';
-        this.paymentMessageClass = 'text-success';
+        // this.paymentMessageClass = 'text-success';
         this.storeOrder();
       }
       if (step == 3) {
@@ -109,14 +112,35 @@ export class OrderComponent implements OnInit, OnDestroy {
       if (step == 4) {
         this.router.navigateByUrl('/home');
         count.unsubscribe();
+        window.location.reload();
       }
     });
   }
   payMoney(){
-    return false;
+    return true;
   }
-  storeOrder() {}
+  storeOrder() {
+    let paymentMethod = this.paymentMethods.find((v) => v.id == parseInt(this.selectPaymentMethodValue));
+    if(paymentMethod == undefined){
+      return this.paymentMessage = 'Please Select Payment Method';
+    }else{
+     let orderDto:OrderDto={
+      UserId:this.activeUser.userId,
+      CartId:this.userCart.id,
+      PaymentMethod:paymentMethod,
+      TotalPrice:this.userPaymentInfo.totalAmount,
+      ShippingCharges:this.userPaymentInfo.shippingCharges,
+      AmountReduced:this.userPaymentInfo.amountReduce,
+      AmountPaid:this.userPaymentInfo.amountPaid
+    };
+ return this.subscription =this.orderService.SaveOrder(orderDto).subscribe((res)=>{
+
+ }
+ )
+}
+  }
+
   ngOnDestroy(): void {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

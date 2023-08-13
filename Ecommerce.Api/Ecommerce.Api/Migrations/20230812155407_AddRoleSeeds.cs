@@ -5,7 +5,7 @@
 namespace Ecommerce.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class AddSeedRoles : Migration
+    public partial class AddRoleSeeds : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,11 +17,12 @@ namespace Ecommerce.Api.Migrations
                 values: new object[] { Guid.NewGuid().ToString(), "User", "User".ToUpper(), Guid.NewGuid().ToString() }
                 );
             migrationBuilder.InsertData(
-            table: "Role",
-            schema: "Auth",
-            columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
-            values: new object[] { Guid.NewGuid().ToString(), "Admin", "Admin".ToUpper(), Guid.NewGuid().ToString() }
-            );
+                table: "Role",
+                schema: "Auth",
+                columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
+                values: new object[] { Guid.NewGuid().ToString(), "Admin", "Admin".ToUpper(), Guid.NewGuid().ToString() }
+                );
+
         }
 
         /// <inheritdoc />

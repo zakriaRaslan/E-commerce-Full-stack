@@ -7,8 +7,10 @@ namespace Ecommerce.Api.Models
         [Key]
         public int ItemCartId { get; set; }
         public int CartId { get; set; }
-        public Cart Cart { get; set; }
-        public int ProductId { get; set; }
-        public virtual Product Product { get; set; } // relationship one-to-one
+        public int SalesProductId { get; set; }
+        public int Quantity { get; set; }
+        public int OriginalProductId { get; set; }
+        public SalesProduct SalesProduct { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

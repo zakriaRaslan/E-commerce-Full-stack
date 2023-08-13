@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230807235703_AddSeedRoles")]
-    partial class AddSeedRoles
+    [Migration("20230812172239_AlterSalesProductsTable")]
+    partial class AlterSalesProductsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,65 @@ namespace Ecommerce.Api.Migrations
                     b.ToTable("User", "Auth");
                 });
 
+            modelBuilder.Entity("Ecommerce.Api.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsOrdered")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("OrderedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ShoppingCart");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.CartItems", b =>
+                {
+                    b.Property<int>("ItemCartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemCartId"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OriginalProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalesProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemCartId");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("SalesProductId");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("Ecommerce.Api.Models.Offer", b =>
                 {
                     b.Property<int>("OfferId")
@@ -134,6 +193,105 @@ namespace Ecommerce.Api.Migrations
                     b.HasKey("OfferId");
 
                     b.ToTable("Offers", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AmountPaid")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
+
+                    b.Property<int>("AmountReduced")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAT")
+                        .HasMaxLength(255)
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShippingCharges")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPrice")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentMethodId");
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.PaymentMethod", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Provider")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Reason")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("PaymentMethods");
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.Product", b =>
@@ -228,6 +386,46 @@ namespace Ecommerce.Api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reviews", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.SalesProduct", b =>
+                {
+                    b.Property<int>("SalesProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalesProductId"));
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsSaled")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("discount")
+                        .HasColumnType("int");
+
+                    b.HasKey("SalesProductId");
+
+                    b.ToTable("SalesProducts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -363,6 +561,70 @@ namespace Ecommerce.Api.Migrations
                     b.ToTable("UserTokens", "Auth");
                 });
 
+            modelBuilder.Entity("Ecommerce.Api.Models.Cart", b =>
+                {
+                    b.HasOne("Ecommerce.Api.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.CartItems", b =>
+                {
+                    b.HasOne("Ecommerce.Api.Models.Cart", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Api.Models.SalesProduct", "SalesProduct")
+                        .WithMany()
+                        .HasForeignKey("SalesProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SalesProduct");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Order", b =>
+                {
+                    b.HasOne("Ecommerce.Api.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Api.Models.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Api.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Payment");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Payment", b =>
+                {
+                    b.HasOne("Ecommerce.Api.Models.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PaymentMethod");
+                });
+
             modelBuilder.Entity("Ecommerce.Api.Models.Product", b =>
                 {
                     b.HasOne("Ecommerce.Api.Models.ProductCategory", "Category")
@@ -446,6 +708,11 @@ namespace Ecommerce.Api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Cart", b =>
+                {
+                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }

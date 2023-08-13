@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230809144217_ModifyColumsInPaymentMethodsTable")]
-    partial class ModifyColumsInPaymentMethodsTable
+    [Migration("20230812191757_AddCartItemsIdToSalesProductsTable")]
+    partial class AddCartItemsIdToSalesProductsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,6 +129,9 @@ namespace Ecommerce.Api.Migrations
                     b.Property<bool>("IsOrdered")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("OrderedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -150,14 +153,23 @@ namespace Ecommerce.Api.Migrations
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OriginalProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalesProductId")
                         .HasColumnType("int");
 
                     b.HasKey("ItemCartId");
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("SalesProductId");
 
                     b.ToTable("CartItems");
                 });
@@ -181,6 +193,76 @@ namespace Ecommerce.Api.Migrations
                     b.HasKey("OfferId");
 
                     b.ToTable("Offers", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AmountPaid")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
+
+                    b.Property<int>("AmountReduced")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAT")
+                        .HasMaxLength(255)
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShippingCharges")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPrice")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentMethodId");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.PaymentMethod", b =>
@@ -304,6 +386,49 @@ namespace Ecommerce.Api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reviews", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.SalesProduct", b =>
+                {
+                    b.Property<int>("SalesProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalesProductId"));
+
+                    b.Property<int>("CartItemsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsSaled")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("discount")
+                        .HasColumnType("int");
+
+                    b.HasKey("SalesProductId");
+
+                    b.ToTable("SalesProducts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -450,21 +575,57 @@ namespace Ecommerce.Api.Migrations
 
             modelBuilder.Entity("Ecommerce.Api.Models.CartItems", b =>
                 {
-                    b.HasOne("Ecommerce.Api.Models.Cart", "Cart")
+                    b.HasOne("Ecommerce.Api.Models.Cart", null)
                         .WithMany("CartItems")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ecommerce.Api.Models.Product", "Product")
+                    b.HasOne("Ecommerce.Api.Models.SalesProduct", "SalesProduct")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("SalesProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SalesProduct");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Order", b =>
+                {
+                    b.HasOne("Ecommerce.Api.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Api.Models.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Api.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cart");
 
-                    b.Navigation("Product");
+                    b.Navigation("Payment");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Api.Models.Payment", b =>
+                {
+                    b.HasOne("Ecommerce.Api.Models.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PaymentMethod");
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.Product", b =>

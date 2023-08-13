@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Api.Models;
+using Ecommerce.Api.Models.Dto;
 using Ecommerce.Api.Services.CartService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -45,15 +46,16 @@ namespace Ecommerce.Api.Controllers
             var carts = _cartService.GetCarts(userId);
             return Ok(carts);
         }
-        [HttpPost("addtocart/{userId}/{productId}")]
-        public async Task<IActionResult> AddToCart(string userId, int productId)
+
+        [HttpPost("addtocart")]
+        public async Task<IActionResult> AddToCart(InsertItemToCartDTO insertModel)
         {
-            var checkUser = await CheckUserByIdAsync(userId);
+            var checkUser = await CheckUserByIdAsync(insertModel.UserId);
             if (!checkUser)
             {
                 return NotFound(new { message = "User Does Not Exist" });
             }
-            var result = await _cartService.InsertToCartItemsAsync(userId, productId);
+            var result = await _cartService.AddToCartItemsAsync(insertModel);
             if (!result)
             {
                 return BadRequest(new { message = "Some Thing Went Wrong" });
@@ -92,6 +94,14 @@ namespace Ecommerce.Api.Controllers
             var carts = await _cartService.GetAllPreviousUserCartsAsync(userId);
             return Ok(carts);
         }
+        [HttpDelete("remove-item-cart/{cartId}/{cartItemId}")]
+        public async Task<IActionResult> RemoveItemFromCart(int cartId, int cartItemId)
+        {
+            var result = await _cartService.RemoveFromCartAsync(cartId, cartItemId);
+            if (result == null) { return BadRequest(new { message = "SomeThing Went Wrong" }); }
+            return Ok(result);
+        }
+
         private async Task<bool> CheckUserByIdAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);

@@ -54,7 +54,9 @@ export class HeaderComponent implements OnInit {
     })
     if(this.authService.IsLoggedIn()){
       this.cartService.getActiveCart(this.authService.GetUser().userId).subscribe((res)=>{
+        if(res.cartItems.length != 0){
         this.cartItems = res.cartItems.length;
+      }
       })
     }
   }

@@ -51,6 +51,10 @@ namespace Ecommerce.Api.Data
             {
                 entity.ToTable("Reviews");
             });
+            Builder.Entity<SalesProduct>(entity =>
+            {
+                entity.Property(x => x.Price).HasColumnType("decimal(18,2)");
+            });
         }
         public DbSet<Product> products { get; set; }
         public DbSet<ProductCategory> productCategories { get; set; }
@@ -59,6 +63,8 @@ namespace Ecommerce.Api.Data
         public DbSet<Cart> ShoppingCart { get; set; }
         public DbSet<CartItems> CartItems { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
-
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<SalesProduct> SalesProducts { get; set; }
     }
 }

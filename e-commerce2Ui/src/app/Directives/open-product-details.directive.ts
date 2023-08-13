@@ -5,15 +5,18 @@ import { Router } from '@angular/router';
   selector: '[OpenProductDetails]'
 })
 export class OpenProductDetailsDirective {
-@Input() productId:number=0;
+  @Input() productId:number=0;
+
 @HostListener('click') OpenProductDetails(){
   window.scroll(0,0);
-  this.router.navigate(['/product-details'],{
+
+  this.router.navigate([`/product-details`],{
     queryParams:{
       id:this.productId
     },
   });
 }
-  constructor(private router:Router) { }
+  constructor(private router:Router) {
+   }
 
 }

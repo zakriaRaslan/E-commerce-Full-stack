@@ -49,6 +49,7 @@
         <option
           *ngFor="let paymentMethod of paymentMethods"
           value="{{ paymentMethod.id }}"
+
         >
           {{ paymentMethod.type }}
           <span *ngIf="paymentMethod.provider != ''">

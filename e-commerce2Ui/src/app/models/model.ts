@@ -93,9 +93,25 @@ export interface Cart{
   cartItems:CartItems[];
 }
 
+export interface SalesProduct{
+  title:string;
+  description:string;
+  price:number;
+  imageName:string;
+  category:string;
+  subCategory:string;
+  discount:number;
+  originalProductId:number;
+  quantity:number;
+  cartItemsId:number;
+}
+
 export interface CartItems{
+  cartItemId:number;
   itemCartId:number;
-  product:Product;
+  salesProduct:SalesProduct;
+  originalProductId:number
+  quantity:number;
 }
 
 export interface Payment{
@@ -115,5 +131,22 @@ type:string;
 provider:string;
 isAvailable:boolean;
 reason:string;
+}
+
+
+export interface OrderDto{
+ UserId:string;
+ CartId:number;
+ PaymentMethod:PaymentMethod;
+ TotalPrice:number;
+ ShippingCharges:number;
+ AmountReduced:number;
+ AmountPaid:number;
+}
+
+export interface InsertItemToCartModel{
+  userId:string;
+  productId:number;
+  quantity:number;
 }
 

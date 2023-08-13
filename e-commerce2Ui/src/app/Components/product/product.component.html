@@ -1,7 +1,7 @@
 <!-- Grid View -->
 <div class="grid-view" *ngIf="view == 'grid'">
   <div class="card text-center">
-    <div class="card-header fw-bold fs-5 text-success">Header</div>
+    <div class="card-header fw-bold fs-5 text-success">{{product.category.subcategory | titlecase}}</div>
     <div
       class="overflow-hidden d-flex justify-content-center align-items-center"
     >
@@ -34,7 +34,7 @@
         {{ product.price | currency : "EGY" }}
       </h6>
     </div>
-    <div class="card-footer d-grid gap-2">
+    <!-- <div class="card-footer d-grid gap-2">
       <button
         class="btn btn-outline-success"
         type="button"
@@ -47,7 +47,7 @@
           >(Login First)</span
         >
       </button>
-    </div>
+    </div> -->
   </div>
 </div>
 
@@ -92,7 +92,7 @@
             {{ product.price | currency : "EGY" }}
           </h5>
         </div>
-        <div class="card-footer text-muted d-grid gap-2">
+        <!-- <div class="card-footer text-muted d-grid gap-2">
           <button
             type="button"
             class="btn btn-outline-success"
@@ -105,7 +105,7 @@
               >(Login First)</span
             >
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -119,34 +119,34 @@
         class="col-4 overflow-hidden d-flex justify-content-center align-items-center"
       >
         <img
-          src="assets/Images/{{ product.category.subcategory }}/{{
-            product.imageName
+          src="assets/Images/{{ CartProduct.subCategory }}/{{
+            CartProduct.imageName
           }}/1.jpg"
           alt="Item Image"
           class="img-fluid rounded-start"
           OpenProductDetails
-          [productId]="product.productId"
+          [productId]="CartProduct.originalProductId"
         />
       </div>
       <div class="col-8">
         <div class="card-body">
-          <h5 class="card-title title">{{ product.title }}</h5>
+          <h5 class="card-title title">{{ CartProduct.title }}</h5>
           <h5 class="card-title text-success">
             {{
               utilityService.applyDiscount(
-                product.price,
-                product.offer.discount
+                CartProduct.price,
+                CartProduct.discount
               ) | currency : "EGY"
             }}
             <br>
-            <span class="text-primary">11 Product Are Available</span>
+            <span class="text-primary">Product Amount ({{CartProduct.quantity}})</span>
           </h5>
           <h6 class="card-subtitle text-danger text-decoration-line-through">
-            {{ product.price | currency : "EGY" }}
+            {{ CartProduct.price | currency : "EGY" }}
           </h6>
         </div>
         <div class="card-footer text-muted d-grid gap-2">
-          <button type="button" class="btn btn-outline-danger">
+          <button type="button" class="btn btn-outline-danger" (click)="RemoveFromCart(CartProduct.cartItemsId)" >
             Remove From Cart
           </button>
         </div>
@@ -162,17 +162,17 @@
       class="overflow-hidden d-flex justify-content-center align-items-center"
     >
       <img
-        src="assets/Images/{{ product.category.subcategory }}/{{
-          product.imageName
+        src="assets/Images/{{ CartProduct.subCategory }}/{{
+          CartProduct.imageName
         }}/1.jpg"
         alt="Card Image"
         class="card-img-top"
-        OpenProductDetails
-        [productId]="product.productId"
       />
+      <!-- OpenProductDetails
+      [productId]="CartProduct.originalProductId" -->
     </div>
     <div class="card-body">
-      <h5 class="card-title title">{{ product.title }}</h5>
+      <h5 class="card-title title">{{ CartProduct.title }}</h5>
     </div>
   </div>
 </div>

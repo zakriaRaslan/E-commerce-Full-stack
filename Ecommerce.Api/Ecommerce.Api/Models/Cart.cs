@@ -13,7 +13,7 @@ namespace Ecommerce.Api.Models
         public AppUser User { get; set; }
         public bool IsOrdered { get; set; }
         public DateTime CreatedDate { get; set; }
-
+        public DateTime OrderedAt { get; set; }
         public ICollection<CartItems> CartItems { get; set; } = new List<CartItems>(); // relationship one-to-many
 
     }

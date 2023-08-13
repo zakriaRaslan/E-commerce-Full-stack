@@ -16,8 +16,8 @@ export class UtilityService {
     let priceToPaid = 0;
     for (let cartItem of cart.cartItems) {
       priceToPaid += this.applyDiscount(
-        cartItem.product.price,
-        cartItem.product.offer.discount
+        cartItem.salesProduct.price,
+        cartItem.salesProduct.discount
       );
     }
     return priceToPaid;

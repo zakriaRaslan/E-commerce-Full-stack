@@ -72,15 +72,20 @@
           </h4>
         </div>
         <div class="card-body">
-          <h6 class="card-subtitle my2 text-primary">
-            {{ product.quantity }} Product Are Available
-          </h6>
+          <div class="ProductQuantity">
+            <label for="quantity" class="form-label">Product Quantity</label>
+            <input type="number" class="form-control" id="quantity" min="1" [defaultValue]="1" [formControl]="ProductQuantity">
+            <span [class]="AddToCartClass" *ngIf="AddToCartMessage != '' ">{{AddToCartMessage}}</span>
+        </div>
+        <span class="card-subtitle my2 text-primary">
+          {{ product.quantity }} Product Are Available
+        </span>
           <div class="d-grid gap-2">
             <button
               type="button"
               class="btn btn-outline-success"
               [disabled]="!this.authService.IsLoggedIn()"
-              (click)="this.cartService.AddToCart(product)"
+              (click)="AddToCart()"
             >
               Add To Cart<span *ngIf="!this.authService.IsLoggedIn()" class="text-danger fw-bold"
                 >(Login First)</span

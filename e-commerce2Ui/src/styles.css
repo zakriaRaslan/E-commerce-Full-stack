@@ -16,3 +16,6 @@ font-family: 'Roboto', sans-serif;
 .modal-backdrop.fade.show{
   z-index: 19;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

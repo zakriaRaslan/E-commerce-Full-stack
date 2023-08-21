@@ -1,8 +1,12 @@
-﻿namespace Ecommerce.Api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Ecommerce.Api.Models
 {
     public class GetTokenModel
     {
-        public required string Email { get; set; }
-        public required string Password { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 }

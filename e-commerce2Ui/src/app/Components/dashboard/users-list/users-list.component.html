@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+  <div class="title d-flex align-items-center justify-content-center fw-bold">
+    <h2>Our Users</h2>
+  </div>
+</div>
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Mobile Number</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr class="table-bordered table-secondary" *ngFor="let user of users">
+        <td>{{user.firstName | titlecase}}</td>
+        <td>{{user.lastName | titlecase}}</td>
+        <td>{{user.userName | titlecase}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.address | titlecase}}</td>
+        <td>{{user.mobile | titlecase}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

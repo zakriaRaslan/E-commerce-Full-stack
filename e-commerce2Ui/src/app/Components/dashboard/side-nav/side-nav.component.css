@@ -1,0 +1,31 @@
+
+.side-nav{
+  width: 350px;
+  min-width: 230px;
+  height: 100vh;
+  background-color: rgb(1, 1, 41);
+  color: #fff;
+  box-shadow: 5px 0 5px #939393;
+  @media only screen and (max-width:1300px) {
+    width: 100px;
+    min-width: 100px;
+  }
+}
+.nav-items{
+  padding-top: 40px;
+  .nav-item{
+    padding: 25px 50px;
+    cursor: pointer;
+    border-bottom: 2px solid #fff;
+    @media only screen and(max-width:1300px) {
+      padding: 25px 40px;
+    }
+    &:hover{
+      background-color: rgb(1, 38, 69);
+    }
+    .nav-icon{
+      margin-right:20px;
+      font-size: 22px;
+    }
+  }
+}

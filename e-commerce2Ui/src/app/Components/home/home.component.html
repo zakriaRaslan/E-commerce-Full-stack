@@ -4,7 +4,13 @@
     *ngFor="let suggestedProduct of suggestedProducts"
   >
     <div class="product-banner position-relative">
-      <button type="button" class="btn btn-outline-light btn-lg">Shop Now</button>
+      <button
+        type="button"
+        class="btn btn-outline-light btn-lg"
+        (click)="toProducts(suggestedProduct.category.category,suggestedProduct.category.subcategory)"
+      >
+        Shop Now
+      </button>
       <img
         src="assets/Images/{{ suggestedProduct.bannerImage }}"
         alt="Banner Image"

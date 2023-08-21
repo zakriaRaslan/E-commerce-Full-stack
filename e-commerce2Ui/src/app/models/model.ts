@@ -38,6 +38,7 @@ export interface User{
   email:string;
   address:string;
   mobile:string;
+  role:string[];
   password:string;
 }
 
@@ -150,3 +151,22 @@ export interface InsertItemToCartModel{
   quantity:number;
 }
 
+export interface AuthModel{
+  message?:string;
+  isAuthenticated:boolean;
+  email:string;
+  token:string;
+  roles:string[];
+  refreshToken:string;
+  refreshTokenExpiration:Date;
+
+}
+
+export interface UserInfo{
+  firstName:string;
+  lastName:string;
+  userName:string;
+  email:string;
+  address:string;
+  mobile:string;
+}

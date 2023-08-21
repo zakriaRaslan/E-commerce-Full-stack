@@ -561,6 +561,42 @@ namespace Ecommerce.Api.Migrations
                     b.ToTable("UserTokens", "Auth");
                 });
 
+            modelBuilder.Entity("Ecommerce.Api.Models.AppUser", b =>
+                {
+                    b.OwnsMany("Ecommerce.Api.Models.RefreshToken", "RefreshTokens", b1 =>
+                        {
+                            b1.Property<string>("AppUserId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+
+                            b1.Property<DateTime>("CreatedOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("ExpiresOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime?>("RevokedOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<string>("Token")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("AppUserId", "Id");
+
+                            b1.ToTable("RefreshToken", "Auth");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AppUserId");
+                        });
+
+                    b.Navigation("RefreshTokens");
+                });
+
             modelBuilder.Entity("Ecommerce.Api.Models.Cart", b =>
                 {
                     b.HasOne("Ecommerce.Api.Models.AppUser", "User")

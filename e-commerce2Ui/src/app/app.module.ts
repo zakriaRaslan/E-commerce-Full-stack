@@ -19,8 +19,11 @@ import { OpenProductsDirective } from './Directives/open-products.directive';
 import { OpenProductDetailsDirective } from './Directives/open-product-details.directive';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import {  HttpClientModule } from '@angular/common/http';
+import {  HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AccountSettingsComponent } from './Components/account-settings/account-settings.component';
+import { TokenInterceptor } from './Interceptors/Interceptors';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -42,8 +45,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     OpenProductDetailsDirective,
     LoginComponent,
     RegisterComponent,
-
-
+    AccountSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,10 +60,17 @@ import { JwtModule } from '@auth0/angular-jwt';
         },
         allowedDomains:['https://localhost:7197/']
       }
-    })
+    }),
+    BrowserAnimationsModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

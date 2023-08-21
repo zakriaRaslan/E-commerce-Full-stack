@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(user).subscribe({
       next:(res:any)=>{
-        console.log(res)
-        localStorage.setItem('token',res.token);
+       this.authService.saveToken(res.token)
+       this.authService.saveRefreshToken(res.refreshToken);
         this.loginMessage=res.message
         this.loginForm.reset();
         this.errorMessage=false;

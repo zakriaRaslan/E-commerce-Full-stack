@@ -39,5 +39,10 @@ export class NavigationService {
     let url = `${this.baseUrl}GetProduct/${id}`
     return this.http.get<Product>(url);
   }
-
+  getProductsBySubCategory(subcategory:string){
+    let url =`${this.baseUrl}get-products-by-subcategory`
+    return this.http.get<any[]>(url,{
+      params:new HttpParams().set('subcategory',subcategory)
+    });
+  }
 }

@@ -7,3 +7,6 @@
 .image-thumbnails>img:hover{
   transform: scale(1.08);
 }
+img{
+  max-height: 500px;
+}

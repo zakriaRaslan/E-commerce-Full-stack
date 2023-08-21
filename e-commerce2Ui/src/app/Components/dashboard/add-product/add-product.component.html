@@ -1,0 +1,140 @@
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="w-50 form-panel">
+        <div class="panel border bg-white">
+          <div class="panel-heading">
+            <h1 class="pt-3 font-weight-bold">Add Product</h1>
+          </div>
+          <div class="panel-body p-3">
+            <form [formGroup]="addProductForm">
+              <div class="form-group">
+                <label for="title" class="form-label">Product Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  name="title"
+                  placeholder="Product Title"
+                  formControlName="title"
+                />
+                <div class="form-text text-danger" *ngIf="Title.errors?.['required']&&(Title.dirty || Title.touched)">*This Field Is Required</div>
+
+              </div>
+
+              <div class="form-group">
+                <label for="price" class="form-label">Product Price</label>
+                <input
+                  formControlName="price"
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  name="price"
+                  placeholder="Product Price"
+                  min="1"
+                />
+                <div class="form-text text-danger" *ngIf="Price.errors?.['required']&&(Price.dirty || Price.touched)">*This Field Is Required</div>
+
+              </div>
+
+              <div class="form-group">
+                <label for="quantity" class="form-label"
+                  >Product Available Quantity</label
+                >
+                <input
+                  formControlName="quantity"
+                  type="number"
+                  class="form-control"
+                  id="quantity"
+                  name="quantity"
+                  placeholder="Product Quantity"
+                  min="1"
+                />
+                <div class="form-text text-danger" *ngIf="Quantity.errors?.['required']&&(Quantity.dirty || Quantity.touched)">*This Field Is Required</div>
+
+              </div>
+
+              <div class="form-group">
+                <label for="imageName" class="form-label"
+                  >Product Image Folder Name</label
+                >
+                <input
+                  formControlName="imageName"
+                  type="text"
+                  class="form-control"
+                  id="imageName"
+                  name="imageName"
+                  placeholder="Product Image Folder Name"
+                />
+                <div class="form-text text-danger" *ngIf="ImageName.errors?.['required']&&(ImageName.dirty || ImageName.touched)">*This Field Is Required</div>
+
+              </div>
+              <div class="form-group">
+                <label for="category" class="form-label">Select Category</label>
+                <select
+                  class="form-select"
+                  name="category"
+                  id="category"
+                  formControlName="categoryId"
+                >
+                  <option value="">Select Category</option>
+                  <option
+                    *ngFor="let category of categoryList"
+                    value="{{ category.categoryId }}"
+                  >
+                    {{ category.subcategory | titlecase }}
+                  </option>
+                </select>
+                <div class="form-text text-danger" *ngIf="CategoryId.errors?.['requiredCategory']&&(CategoryId.dirty || CategoryId.touched)">*This Field Is Required</div>
+
+              </div>
+              <div class="form-group">
+                <label for="category" class="form-label">Select Offer</label>
+                <select
+                  class="form-select"
+                  name="category"
+                  id="category"
+                  formControlName="offerId"
+                >
+                  <option value="">No Offer</option>
+                  <option
+                    *ngFor="let offer of OffersList"
+                    value="{{ offer.offerId }}"
+                  >
+                    {{ offer.title | titlecase
+                    }}<span>Discount = {{ offer.discount }}%</span>
+                  </option>
+                </select>
+
+              </div>
+              <div class="form-group">
+                <label for="description" class="form-label"
+                  >Product Description</label
+                >
+                <textarea
+                  name="description"
+                  id="description"
+                  class="w-100 p-2"
+                  rows="7"
+                  formControlName="description"
+                ></textarea>
+                <div class="form-text text-danger" *ngIf="Description.errors?.['requiredDescription'] && (Description.dirty || Description.touched)">*Please Input Product Description (Must Be > 10 Characters) </div>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  [disabled]="addProductForm.invalid"
+                  class="btn btn-outline-success mx-auto d-block"
+                  (click)="AddProduct()"
+                >
+                  Add Product
+                </button>
+                <div class="text-success fs-3">{{addProductMessages}}</div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

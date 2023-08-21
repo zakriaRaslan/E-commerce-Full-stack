@@ -1,11 +1,14 @@
 <header
-  class="w-100 h-100 bg-dark px-4 d-flex justify-content-between align-items-center"
+  class="header w-100 h-100 px-4 d-flex justify-content-between align-items-center"
 >
   <div class="fs-2 text-light fw-bold fst-italic">
     <span (click)="Home()" [style.cursor]="'pointer'">Raslan</span>
   </div>
   <div class="btn-toolbar" role="toolbar">
     <div class="btn-group btn-group-ls me-3" role="group">
+      <div class="btn-group mx-3">
+        <button *ngIf="this.authService.IsLoggedIn() && this.authService.GetUser().role.includes('Admin')" type="button" class="btn btn-outline-primary" routerLink="/dashboard">Dashboard</button>
+      </div>
       <button type="button" class="btn btn-outline-light" routerLink="/home">
         Home
       </button>
@@ -66,13 +69,13 @@
       >
         Register
       </button>
-      <button type="button" class="btn btn-outline-light" *ngIf="this.authService.IsLoggedIn()">Account</button>
+      <button type="button" class="btn btn-outline-light" *ngIf="this.authService.IsLoggedIn()" routerLink="/account">Account</button>
       <button type="button" class="btn btn-outline-light" routerLink="/cart" *ngIf="this.authService.IsLoggedIn()" >
         Cart <span class="badge bg-warning text-dark">{{cartItems}}</span>
       </button>
       <button type="button" class="btn btn-outline-light" routerLink="/order" *ngIf="this.authService.IsLoggedIn()" >
         Orders</button
-      >z
+      >
       <button type="button" class="btn btn-outline-light" (click)="LogOut()" *ngIf="this.authService.IsLoggedIn()">LogOut</button>
     </div>
   </div>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Api.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ShoppingController : ControllerBase
@@ -23,10 +24,12 @@ namespace Ecommerce.Api.Controllers
             ProductCategories = _dataAccess.GetProductCategories();
             return Ok(ProductCategories);
         }
+
         [HttpGet("Get-Products")]
         public IActionResult GetProducts(string category, string subCategory, int count = 1)
         {
-            if (category == null || subCategory == null) { return BadRequest(new { message = " Category Or SubCategory Can Not Be Null" }); }
+            if (category == null || subCategory == null)
+            { return BadRequest(new { message = " Category Or SubCategory Can Not Be Null" }); }
             var products = _dataAccess.GetProducts(category, subCategory, count);
 
             return Ok(products);
@@ -38,5 +41,13 @@ namespace Ecommerce.Api.Controllers
             if (product == null) { return NotFound(new { message = "No Product With This Id" }); }
             return Ok(product);
         }
+        [HttpGet("get-products-by-subcategory")]
+        public async Task<IActionResult> GetProductsBySubCategory(string subCategory)
+        {
+            if (subCategory == null) { return BadRequest("Subcategory Can Not Be Null"); }
+            var result = await _dataAccess.GetProductsBySubcategoryAsync(subCategory);
+            return Ok(result);
+        }
+
     }
 }

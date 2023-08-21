@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Api.Data;
 using Ecommerce.Api.Models;
+using Ecommerce.Api.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Api.Services.ProductCategoryService
@@ -33,12 +34,33 @@ namespace Ecommerce.Api.Services.ProductCategoryService
             return products;
         }
 
+        public async Task<List<Product>> GetProductsBySubcategoryAsync(string subcategory)
+        {
+            var products = await _context.products.Where(x => x.Category.Subcategory == subcategory)
+                .Include(x => x.Category).Include(x => x.Offer).ToListAsync();
+            return products;
+        }
+
         public Product GetProductById(int id)
         {
             var product = _context.products.Where(x => x.ProductId == id)
                 .Include(x => x.Category).Include(x => x.Offer).FirstOrDefault();
             return product;
         }
+
+        public async Task<string> AddCategoryAsync(CategoryDto model)
+        {
+            var errorMessage = string.Empty;
+            var isCategoryExist = await _context.productCategories
+                .AnyAsync(x => x.Subcategory == model.Subcategory && x.Category == model.Category);
+            if (isCategoryExist)
+            {
+                errorMessage = "This Category Is Already Exist";
+                return errorMessage;
+            }
+            return errorMessage;
+        }
+
     }
 
 }

@@ -28,9 +28,9 @@
           utilityService.applyDiscount(product.price, product.offer.discount)
             | currency : "EGP"
         }}
-        <span class="text-primary">-{{ product.offer.discount }}%</span>
+        <span *ngIf="product.offer.discount != 0"  class="text-primary">-{{ product.offer.discount }}%</span>
       </h5>
-      <h6 class="card-subtitle text-danger text-decoration-line-through">
+      <h6 *ngIf="product.offer.discount != 0"  class="card-subtitle text-danger text-decoration-line-through">
         {{ product.price | currency : "EGY" }}
       </h6>
     </div>
@@ -86,9 +86,9 @@
                 product.offer.discount
               ) | currency : "EGY"
             }}
-            <span class="text-primary">-{{ product.offer.discount }}%</span>
+            <span *ngIf="product.offer.discount != 0" class="text-primary">-{{ product.offer.discount }}%</span>
           </h2>
-          <h5 class="card-subtitle text-danger text-decoration-line-through">
+          <h5 *ngIf="product.offer.discount != 0" class="card-subtitle text-danger text-decoration-line-through">
             {{ product.price | currency : "EGY" }}
           </h5>
         </div>
@@ -141,7 +141,7 @@
             <br>
             <span class="text-primary">Product Amount ({{CartProduct.quantity}})</span>
           </h5>
-          <h6 class="card-subtitle text-danger text-decoration-line-through">
+          <h6 *ngIf="CartProduct.discount != 0" class="card-subtitle text-danger text-decoration-line-through">
             {{ CartProduct.price | currency : "EGY" }}
           </h6>
         </div>

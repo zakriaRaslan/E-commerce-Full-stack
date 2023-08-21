@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="title d-flex align-items-center justify-content-center fw-bold">
+      <h2>Add Category</h2>
+    </div>
+    <div class="row">
+      <div class="form d-flex align-items-center justify-content-center">
+        <form class="w-50 main-form" [formGroup]="addCategoryForm">
+          <div class="form-group my-3">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" id="category" class="form-control" placeholder="Enter Category" formControlName="category">
+            <div class="form-text text-danger" *ngIf="Category.errors?.['required'] && (Category.dirty || Category.touched)">*This Field Is Required</div>
+            <div class="form-text text-danger" *ngIf="Category.errors?.['maxlength'] && (Category.dirty || Category.touched)">*MaxLength Is (100)</div>
+            <div class="form-text text-danger" *ngIf="Category.errors?.['minlength'] && (Category.dirty || Category.touched)">*MinLength Is (3)</div>
+          </div>
+          <div class="form-group my-3">
+            <label for="subcategory" class="form-label">Subcategory</label>
+            <input type="text" id="subcategory" class="form-control" placeholder="Enter Subcategory" formControlName="subcategory">
+            <div class="form-text text-danger" *ngIf="Subcategory.errors?.['required'] && (Subcategory.dirty || Subcategory.touched)">*This Field Is Required</div>
+            <div class="form-text text-danger" *ngIf="Subcategory.errors?.['maxlength'] && (Subcategory.dirty || Subcategory.touched)">*MaxLength Is (100)</div>
+            <div class="form-text text-danger" *ngIf="Subcategory.errors?.['minlength'] && (Subcategory.dirty || Subcategory.touched)">*MinLength Is (3)</div>
+          </div>
+          <div class="fs-3 text-success">{{formMessage}}</div>
+          <div class=" d-flex align-items-center justify-content-center">
+            <button [disabled]="addCategoryForm.invalid" type="button" class="btn btn-outline-primary w-50 mt-3" (click)="AddCategory()">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

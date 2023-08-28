@@ -20,7 +20,7 @@
             <div class="form-text text-danger" *ngIf="Subcategory.errors?.['maxlength'] && (Subcategory.dirty || Subcategory.touched)">*MaxLength Is (100)</div>
             <div class="form-text text-danger" *ngIf="Subcategory.errors?.['minlength'] && (Subcategory.dirty || Subcategory.touched)">*MinLength Is (3)</div>
           </div>
-          <div class="fs-3 text-success">{{formMessage}}</div>
+          <div class="fs-4 {{formMessageClass}} text-center">{{formMessage}}</div>
           <div class=" d-flex align-items-center justify-content-center">
             <button [disabled]="addCategoryForm.invalid" type="button" class="btn btn-outline-primary w-50 mt-3" (click)="AddCategory()">Add</button>
           </div>

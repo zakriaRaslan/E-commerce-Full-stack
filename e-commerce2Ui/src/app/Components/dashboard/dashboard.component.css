@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 .side-nav{
+  max-width: 350px;
   z-index: 2;
 }
 .main{

@@ -11,6 +11,7 @@ namespace Ecommerce.Api.Controllers
     {
         private readonly IDashboardService _dashboardService;
         private readonly IDataAccess _dataAccess;
+
         public DashboardController(IDashboardService dashboardService, IDataAccess dataAccess)
         {
             _dashboardService = dashboardService;
@@ -42,7 +43,7 @@ namespace Ecommerce.Api.Controllers
 
 
         [HttpPost("add-product")]
-        public async Task<IActionResult> AddProductAsync(AddProductDto model)
+        public async Task<IActionResult> AddProductAsync([FromBody] AddProductDto model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -65,15 +66,45 @@ namespace Ecommerce.Api.Controllers
             return Ok();
         }
         [HttpPost("add-category")]
-        public async Task<IActionResult> AddCategoryAsync(CategoryDto model)
+        public async Task<IActionResult> AddCategoryAsync([FromBody] CategoryDto model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _dataAccess.AddCategoryAsync(model);
+            var result = await _dashboardService.AddCategoryAsync(model);
             if (!string.IsNullOrEmpty(result)) return BadRequest(result);
             return Ok("Category Added Successfuly");
+        }
+
+        [HttpPost("add-offer")]
+        public async Task<IActionResult> AddOfferAsync([FromBody] OfferDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _dashboardService.AddOfferAsync(model);
+            if (!string.IsNullOrEmpty(result))
+            {
+                return BadRequest(result);
+            }
+            return Ok(new { message = "The Offer Added Successfuly" });
+        }
+
+        [HttpPatch("edit-product")]
+        public async Task<IActionResult> ModifyProductAsync([FromBody] AddProductDto product)
+        {
+            if (product == null)
+            {
+                return BadRequest(new { message = "Product Can Not Be Null" });
+            }
+            var result = await _dataAccess.ModifyProductAsync(product);
+            if (!result)
+            {
+                return BadRequest(new { message = "Something Went Wrong" });
+            }
+            return Ok(new { message = "Product Modified Successfully" });
         }
     }
 }

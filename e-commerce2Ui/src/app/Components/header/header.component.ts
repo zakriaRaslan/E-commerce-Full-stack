@@ -64,20 +64,20 @@ export class HeaderComponent implements OnInit {
   Home() {
     this.router.navigate(['/home']);
   }
-  OpenModal(name: string) {
-    this.container.clear();
-    let componentType: Type<any>;
-    if (name === 'login') {
-      componentType = LoginComponent;
-      this.modalTitle.nativeElement.textContent = 'Enter Login Information';
-      this.container.createComponent(componentType);
-    }
-    if (name === 'register') {
-      componentType = RegisterComponent;
-      this.modalTitle.nativeElement.textContent = 'Enter Register Information';
-      this.container.createComponent(componentType);
-    }
-  }
+  // OpenModal(name: string) {
+  //   this.container.clear();
+  //   let componentType: Type<any>;
+  //   if (name === 'login') {
+  //     componentType = LoginComponent;
+  //     this.modalTitle.nativeElement.textContent = 'Enter Login Information';
+  //     this.container.createComponent(componentType);
+  //   }
+  //   if (name === 'register') {
+  //     componentType = RegisterComponent;
+  //     this.modalTitle.nativeElement.textContent = 'Enter Register Information';
+  //     this.container.createComponent(componentType);
+  //   }
+  // }
   LogOut() {
     this.authService.logout();
   }

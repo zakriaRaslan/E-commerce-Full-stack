@@ -1,6 +1,8 @@
-<h1>{{userInfo.userName}}</h1>
-<h1>{{userInfo.firstName}}</h1>
-<h1>{{userInfo.lastName}}</h1>
-<h1>{{userInfo.email}}</h1>
-<h1>{{userInfo.address}}</h1>
-<h1>{{userInfo.mobile}}</h1>
+<div class="row">
+  <div class="col-2 side-nav">
+    <app-acc-side-nav></app-acc-side-nav>
+  </div>
+  <div class="col main">
+    <router-outlet></router-outlet>
+  </div>
+</div>

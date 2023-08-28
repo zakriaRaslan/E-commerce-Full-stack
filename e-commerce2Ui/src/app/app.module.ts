@@ -11,7 +11,7 @@ import { ProductsComponent } from './Components/products/products.component';
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
 import { CartComponent } from './Components/cart/cart.component';
 import { OrderComponent } from './Components/order/order.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
@@ -21,9 +21,9 @@ import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import {  HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import { AccountSettingsComponent } from './Components/account-settings/account-settings.component';
 import { TokenInterceptor } from './Interceptors/Interceptors';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
 
 
 
@@ -45,7 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OpenProductDetailsDirective,
     LoginComponent,
     RegisterComponent,
-    AccountSettingsComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FontAwesomeModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter : () =>{
@@ -61,7 +62,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         allowedDomains:['https://localhost:7197/']
       }
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
 
   ],
   providers: [

@@ -67,5 +67,40 @@ namespace Ecommerce.Api.Services.DashboardService
             await _context.SaveChangesAsync();
             return errorMesages;
         }
+
+        public async Task<string> AddCategoryAsync(CategoryDto model)
+        {
+            var errorMessage = string.Empty;
+            var isCategoryExist = await _context.productCategories
+                .AnyAsync(x => x.Subcategory == model.Subcategory && x.Category == model.Category);
+            if (isCategoryExist)
+            {
+                errorMessage = "This Category Is Already Exist";
+                return errorMessage;
+            }
+            var category = new ProductCategory();
+            category.Category = model.Category;
+            category.Subcategory = model.Subcategory;
+            await _context.productCategories.AddAsync(category);
+            await _context.SaveChangesAsync();
+            return errorMessage;
+        }
+
+        public async Task<string> AddOfferAsync(OfferDto model)
+        {
+            var errorMessage = string.Empty;
+            var OfferIsAvaliable = await _context.Offers.AnyAsync(x => x.Title == model.Title && x.Discount == model.Discount);
+            if (OfferIsAvaliable)
+            {
+                errorMessage = "This Offer Is Already Exist";
+                return errorMessage;
+            }
+            var offer = new Offer();
+            offer.Title = model.Title;
+            offer.Discount = model.Discount;
+            await _context.Offers.AddAsync(offer);
+            await _context.SaveChangesAsync();
+            return errorMessage;
+        }
     }
 }

@@ -11,6 +11,6 @@ namespace Ecommerce.Api.Services.ProductCategoryService
         IEnumerable<Product> GetProducts(string category, string subcategory, int count);
         Product GetProductById(int id);
         Task<List<Product>> GetProductsBySubcategoryAsync(string subcategory);
-        Task<string> AddCategoryAsync(CategoryDto model);
+        Task<bool> ModifyProductAsync(AddProductDto product);
     }
 }

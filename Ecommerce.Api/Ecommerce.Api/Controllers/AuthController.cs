@@ -10,10 +10,11 @@ namespace Ecommerce.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-
         public AuthController(IAuthService authService)
         {
             _authService = authService;
+
+
         }
 
         [HttpPost("register")]
@@ -40,6 +41,43 @@ namespace Ecommerce.Api.Controllers
                 return BadRequest(ModelState);
             }
             var result = await _authService.GetTokenAsync(model);
+            if (!result.IsAuthenticated)
+            {
+                return BadRequest(result.Message);
+            }
+            if (!string.IsNullOrEmpty(result.RefreshToken))
+            {
+                SetRefreshTokenInCookies(result.RefreshToken, result.RefreshTokenExpiration);
+            }
+            return Ok(result);
+        }
+        [HttpPatch("modify-user")]
+        public async Task<IActionResult> ModifiyUserAsync(ModifyUserDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _authService.ModfiyUserAsync(model);
+            if (!result.IsAuthenticated)
+            {
+                return BadRequest(result.Message);
+            }
+            if (!string.IsNullOrEmpty(result.RefreshToken))
+            {
+                SetRefreshTokenInCookies(result.RefreshToken, result.RefreshTokenExpiration);
+            }
+            return Ok(result);
+        }
+
+        [HttpPatch("change-password")]
+        public async Task<IActionResult> ChangePasswordAsync(ChangePasswordDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _authService.ChangePasswordAsync(model);
             if (!result.IsAuthenticated)
             {
                 return BadRequest(result.Message);
@@ -103,6 +141,53 @@ namespace Ecommerce.Api.Controllers
                 return NotFound("We Have Not Users Yet");
             }
             return Ok(result);
+        }
+
+        [HttpGet("get-user-by-id/{userId}")]
+        public async Task<IActionResult> GetUserByIdAsync(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest(new { message = "UserId Is Required" });
+            }
+
+            var result = await _authService.GetUserByIdAsync(userId);
+            if (result == null)
+            {
+                return NotFound(new { message = "User Not Found" });
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("send-reset-password-email/{email}")]
+        public async Task<IActionResult> SendResetPasswordEmailAsync(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest("Email Is Required");
+            }
+            var result = await _authService.SendResetPasswordEmailAsync(email);
+            if (!string.IsNullOrEmpty(result))
+            {
+                return BadRequest(result);
+            }
+            return Ok(new { message = "Email Send Successfully" });
+
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPasswordAsync(ResetPasswordDto resetPasswordDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _authService.ResetPasswordAsync(resetPasswordDto);
+            if (!string.IsNullOrEmpty(result))
+            {
+                return BadRequest(result);
+            }
+            return Ok(new { message = "Password Reset Successfully" });
         }
 
         private void SetRefreshTokenInCookies(string refreshToken, DateTime expires)

@@ -1,9 +1,10 @@
-<div class="side-nav">
+<!-- <div class="side-nav">
 <div class="nav-items">
   <div class="nav-item" routerLink="/dashboard">
     <fa-icon class="nav-icon" [icon]="dashboard"></fa-icon>
     <span>Dashboard</span>
   </div>
+
   <div class="nav-item" routerLink="add-product">
     <fa-icon class="nav-icon" [icon]="addProduct"></fa-icon>
     <span>Add Product</span>
@@ -12,17 +13,163 @@
     <fa-icon class="nav-icon" [icon]="addProduct"></fa-icon>
     <span>Add Category</span>
   </div>
+  <div class="nav-item" routerLink="add-offer">
+    <fa-icon class="nav-icon" [icon]="addProduct"></fa-icon>
+    <span>Add Offer</span>
+  </div>
   <div class="nav-item" routerLink="edit-product">
     <fa-icon class="nav-icon" [icon]="edit"></fa-icon>
     <span>Edit Product</span>
   </div>
+
   <div class="nav-item" routerLink="users-list">
     <fa-icon class="nav-icon" [icon]="users"></fa-icon>
     <span>Users</span>
   </div>
+
   <div class="nav-item">
     <fa-icon class="nav-icon" [icon]="contact"></fa-icon>
     <span>Contact</span>
   </div>
+
+  <div class="nav-item btn-group w-100" role="group">
+    <button
+      type="button"
+      class="btn btn-outline-light dropdown-toggle"
+      data-bs-toggle="dropdown"
+    >
+      Add
+    </button>
+    <ul class="dropdown-menu fs-5 w-100">
+        <li
+          [style.cursor]="'pointer'"
+        >
+          <a
+            class="dropdown-item"
+          routerLink="add-product"
+          >
+            Add Product
+          </a>
+        </li>
+        <li>
+          <hr class="dropdown-divider" />
+        </li>
+        <li
+          [style.cursor]="'pointer'"
+        >
+          <a
+            class="dropdown-item"
+          routerLink="add-category"
+          >
+            Add Category
+          </a>
+        </li>
+        <li>
+          <hr class="dropdown-divider" />
+        </li>
+        <li
+          [style.cursor]="'pointer'"
+        >
+          <a
+            class="dropdown-item"
+          routerLink="add-offer"
+          >
+            Add Offer
+          </a>
+        </li>
+        <li>
+          <hr class="dropdown-divider" />
+        </li>
+    </ul>
+  </div>
 </div>
+</div> -->
+
+<div class="nav-bar d-flex flex-column flex-shrink-0 p-3">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    <span class="fs-4">Dashboard Setting</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a routerLink="/dashboard" class="nav-link text-white" aria-current="page">
+        <fa-icon class="nav-icon" width="16" height="16" [icon]="dashboard"></fa-icon>
+        Home
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="users-list" class="nav-link text-white">
+        <fa-icon class="nav-icon" width="16" height="16" [icon]="users"></fa-icon>
+        Users
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="products-list" class="nav-link text-white">
+        <fa-icon class="nav-icon" width="16" height="16" [icon]="edit"></fa-icon>
+      Products List
+      </a>
+    </li>
+    <div class="nav-item btn-group w-100" role="group">
+      <button
+        type="button"
+        class="btn btn-outline-light dropdown-toggle"
+        data-bs-toggle="dropdown"
+      >
+        Add
+      </button>
+      <ul class="dropdown-menu fs-5 w-100">
+          <li
+            [style.cursor]="'pointer'"
+          >
+            <a
+              class="dropdown-item"
+            routerLink="add-product"
+            >
+              Add Product
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li
+            [style.cursor]="'pointer'"
+          >
+            <a
+              class="dropdown-item"
+            routerLink="add-category"
+            >
+              Add Category
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li
+            [style.cursor]="'pointer'"
+          >
+            <a
+              class="dropdown-item"
+            routerLink="add-offer"
+            >
+              Add Offer
+            </a>
+          </li>
+      </ul>
+    </div>
+  </ul>
+  <hr>
+  <div class="dropdown">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
+      <strong>User</strong>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+      <li><a class="dropdown-item" href="#">New project...</a></li>
+      <li><a class="dropdown-item" href="#">Settings</a></li>
+      <li><a class="dropdown-item" href="#">Profile</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Sign out</a></li>
+    </ul>
+  </div>
 </div>

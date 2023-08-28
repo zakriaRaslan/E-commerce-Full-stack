@@ -12,5 +12,10 @@ namespace Ecommerce.Api.Services.AuthService
         Task<string> AddToRoleAsync(AddToRoleDto model);
         Task<bool> RevokeTokenAsync(string token);
         Task<List<UserInfoDto>> GetUsersInfoAsync();
+        Task<AuthModel> ModfiyUserAsync(ModifyUserDto model);
+        Task<AuthModel> ChangePasswordAsync(ChangePasswordDto model);
+        Task<string> SendResetPasswordEmailAsync(string email);
+        Task<string> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);
+        Task<UserInfoDto> GetUserByIdAsync(string userId);
     }
 }

@@ -9,10 +9,13 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from 'src/app/Interceptors/Interceptors';
-import { EditProductsComponent } from './edit-products/edit-products.component';
 import { OpenProductsBySubcategoryDirective } from './DashboardDirectives/open-products-by-subcategory.directive';
 import { UsersListComponent } from './users-list/users-list.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddOfferComponent } from './add-offer/add-offer.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ProductsListComponent } from './products-list/products-list.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 
@@ -21,10 +24,13 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     DashboardComponent,
     SideNavComponent,
     AddProductComponent,
-    EditProductsComponent,
     OpenProductsBySubcategoryDirective,
     UsersListComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    AddOfferComponent,
+    UserEditComponent,
+    ProductsListComponent,
+    EditProductComponent
   ],
   imports: [
     CommonModule,

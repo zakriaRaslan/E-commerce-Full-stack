@@ -1,0 +1,9 @@
+.description{
+  height: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-img{
+  width: 100px;
+  height: 100px;
+}

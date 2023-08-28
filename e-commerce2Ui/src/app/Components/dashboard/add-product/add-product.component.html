@@ -4,7 +4,7 @@
       <div class="w-50 form-panel">
         <div class="panel border bg-white">
           <div class="panel-heading">
-            <h1 class="pt-3 font-weight-bold">Add Product</h1>
+            <h1 class="pt-3 font-weight-bold title">Add Product</h1>
           </div>
           <div class="panel-body p-3">
             <form [formGroup]="addProductForm">
@@ -120,6 +120,7 @@
                 ></textarea>
                 <div class="form-text text-danger" *ngIf="Description.errors?.['requiredDescription'] && (Description.dirty || Description.touched)">*Please Input Product Description (Must Be > 10 Characters) </div>
               </div>
+              <div class="text-success fs-4 text-center">{{addProductMessages}}</div>
               <div>
                 <button
                   type="submit"
@@ -129,7 +130,6 @@
                 >
                   Add Product
                 </button>
-                <div class="text-success fs-3">{{addProductMessages}}</div>
               </div>
             </form>
           </div>

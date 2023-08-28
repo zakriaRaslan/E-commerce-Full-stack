@@ -48,18 +48,26 @@ namespace Ecommerce.Api.Services.ProductCategoryService
             return product;
         }
 
-        public async Task<string> AddCategoryAsync(CategoryDto model)
+        public async Task<bool> ModifyProductAsync(AddProductDto product)
         {
-            var errorMessage = string.Empty;
-            var isCategoryExist = await _context.productCategories
-                .AnyAsync(x => x.Subcategory == model.Subcategory && x.Category == model.Category);
-            if (isCategoryExist)
+            var originalProduct = await _context.products.FindAsync(product.productId);
+            var Category = await _context.productCategories.FindAsync(product.CategoryId);
+            var Offer = await _context.Offers.FindAsync(product.OfferId);
+            if (originalProduct != null)
             {
-                errorMessage = "This Category Is Already Exist";
-                return errorMessage;
+                originalProduct.Price = product.Price;
+                originalProduct.Description = product.Description;
+                originalProduct.Category = Category;
+                originalProduct.Offer = Offer;
+                originalProduct.Quantity = product.Quantity;
+                originalProduct.Title = product.Title;
+                await _context.SaveChangesAsync();
+                return true
+                ;
             }
-            return errorMessage;
+            return false;
         }
+
 
     }
 

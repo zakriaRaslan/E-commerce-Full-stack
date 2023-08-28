@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+    <div class="d-flex justify-content-start align-items-start">
+      <div class="fs-4 me-2 mt-2">
+        Choose A Category:
+      </div>
+      <button
+      type="button"
+      class="btn btn-success dropdown-toggle"
+      data-bs-toggle="dropdown"
+    >
+      Category
+    </button>
+    <ul class="dropdown-menu fs-5">
+      <ng-container *ngFor="let item of navigationList; let i = index">
+        <li class="text-center fw-bold">
+          {{ item.category | titlecase }}
+        </li>
+        <li
+          *ngFor="let subcategory of item.subCategory"
+          [style.cursor]="'pointer'"
+        >
+          <a
+            class="dropdown-item"
+            (click)="SelectCategory(subcategory)"
+          >
+            {{ subcategory | titlecase }}
+          </a>
+        </li>
+        <li *ngIf="i != navigationList.length - 1">
+          <hr class="dropdown-divider" />
+        </li>
+      </ng-container>
+    </ul>
+    </div>
+  </div>
+  <div class="row">
+  <div class="title d-flex align-items-center justify-content-center fw-bold">
+    <h2>Our Products</h2>
+  </div>
+</div>
+<div class="row">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+      <th>Id</th>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Offer Title</th>
+      <th>Discount</th>
+      <th>Category</th>
+      <th>Subcategory</th>
+      <th>Modify</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr class="table-bordered table-secondary" *ngFor="let product of products">
+        <td>{{product.productId}}</td>
+        <td><img
+          class="product-img"
+          src="assets/Images/{{ product.category.subcategory }}/{{
+            product.imageName
+          }}/1.jpg"
+          alt="Profile image"
+        /></td>
+        <td>{{product.title | titlecase}}</td>
+        <td class="description">{{product.description | titlecase}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.offer.title | titlecase}}</td>
+        <td>{{product.offer.discount}}</td>
+        <td>{{product.category.category}}</td>
+        <td>{{product.category.subcategory}}</td>
+        <td><button class="btn btn-primary" [routerLink]="['/dashboard/edit-product',product.productId]">Modify</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+

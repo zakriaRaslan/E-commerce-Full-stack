@@ -1,0 +1,117 @@
+<div class="container">
+<div class="title-container">
+  <h2 class="title d-flex justify-content-center align-items-center">User Info</h2>
+</div>
+<div class="form-container">
+<form [formGroup]="userInfoForm">
+  <div class="form-group">
+    <label for="firstname" class="form-label">FirstName</label>
+    <input type="text" id="firstname" class="form-control" formControlName="firstName" maxlength="50">
+    <div
+    class="form-text text-danger"
+    *ngIf="FirstName.errors?.['required'] && (FirstName.dirty || FirstName.touched)"
+  >
+    First Name Is Required.
+  </div>
+  <div
+    class="form-text text-danger"
+    *ngIf="FirstName.errors?.['minlength'] && (FirstName.dirty || FirstName.touched)"
+  >
+    First Name Is Too Short , At Least (2) Characters.
+  </div>
+  <div
+    class="form-text text-danger"
+    *ngIf="FirstName.errors?.['pattern'] && (FirstName.dirty || FirstName.touched)"
+  >
+    First Name Should Start With An Alphabet.
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="lastname" class="form-label">LastName</label>
+    <input type="text" id="lastname" class="form-control" formControlName="lastName">
+    <div
+    class="form-text text-danger"
+    *ngIf="LastName.errors?.['required'] && (LastName.dirty || LastName.touched)"
+  >
+    Last Name Is Required.
+  </div>
+  <div
+    class="form-text text-danger"
+    *ngIf="LastName.errors?.['minlength'] && (LastName.dirty || LastName.touched)"
+  >
+    Last Name Is Too Short , At Least (2) Characters.
+  </div>
+  <div
+    class="form-text text-danger"
+    *ngIf="LastName.errors?.['pattern'] && (LastName.dirty || LastName.touched)"
+  >
+    Last Name Should Start With An Alphabet.
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="username" class="form-label">UserName</label>
+    <input type="text" id="username" class="form-control" formControlName="userName">
+  </div>
+  <div class="form-group">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" id="email" class="form-control"formControlName="email">
+  </div>
+  <div class="form-group">
+    <label for="address" class="form-label">Address</label>
+    <input type="text" id="address" class="form-control" formControlName="address">
+    <div
+    class="form-text text-danger"
+    *ngIf="Address.errors?.['required'] && (Address.dirty || Address.touched)"
+  >
+    Address Is Required
+  </div>
+    <div
+    class="form-text text-danger"
+    *ngIf="Address.errors?.['minlength'] && (Address.dirty || Address.touched)"
+  >
+    Address Minlength Is (3)
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="mobile" class="form-label">Mobile Number</label>
+    <input type="text" id="mobile" class="form-control" formControlName="mobile">
+    <div
+    class="form-text text-danger"
+    *ngIf="Mobile.errors?.['required'] && (Mobile.dirty || Mobile.touched)"
+  >
+    Mobile Number Is Required
+  </div>
+  <div
+    class="form-text text-danger"
+    *ngIf="Mobile.errors?.['pattern'] && (Mobile.dirty || Mobile.touched)"
+  >
+   Invalid Mobile Number
+  </div>
+  <div
+    class="form-text text-danger"
+    *ngIf="Mobile.errors?.['minlength'] && (Mobile.dirty || Mobile.touched)"
+  >
+    Mobile Number Should be At Least (8) Character
+  </div>
+  <div class="form-group row">
+    <div class="col-11">
+      <label for="password" class="form-label">Password</label>
+      <input type="{{passwordType}}" id="password" name="password" class="form-control" formControlName="password" placeholder="Input Your Password"  >
+    </div>
+    <div class="col-1">
+      <br>
+      <br>
+      <fa-icon [icon]="eyeIcon" (click)="togglePassword()" class="mt-4" style="font-size: 20px;"></fa-icon>
+    </div>
+    <div class="form-text text-danger" *ngIf="Password.errors?.['required'] && (Password.dirty || Password.touched)">*Password Is Required</div>
+  </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <h3 class="fw-bold {{formMessageClass}}">{{formMessage}}</h3>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <button class="btn btn-outline-primary" type="submit" [disabled]="userInfoForm.invalid || !userInfoForm.dirty" (click)="SaveUserChanges()">Save Changes</button>
+  </div>
+</form>
+</div>
+</div>

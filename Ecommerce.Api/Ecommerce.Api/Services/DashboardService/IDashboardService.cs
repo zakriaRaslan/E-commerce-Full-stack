@@ -9,5 +9,8 @@ namespace Ecommerce.Api.Services.DashboardService
         Task<List<Offer>> GetAvailabeOffersAsync();
         Task<List<ProductCategory>> GetProductCategoriesAsync();
         Task<string> DeleteProductAsync(int productId);
+        Task<string> AddCategoryAsync(CategoryDto model);
+        Task<string> AddOfferAsync(OfferDto model);
+
     }
 }

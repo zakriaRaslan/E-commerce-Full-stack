@@ -9,6 +9,7 @@ import { ConfirmPasswordValidator } from 'src/app/Custom Validators/confirm-pass
 import { AuthService } from 'src/app/Services/auth.service';
 import { RegisterModel, User } from 'src/app/models/model';
 import{faEye,faEyeSlash} from '@fortawesome/free-solid-svg-icons'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   invalidConfirmPassword: boolean = false;
   registerMessage: string = '';
-  constructor(private fb: FormBuilder, private Auth: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService,private router:Router) {}
   ngOnInit(): void {
     this.registerForm = this.fb.group(
       {
@@ -81,10 +82,14 @@ export class RegisterComponent implements OnInit {
       mobile: this.Mobile.value,
       password: this.Password.value,
     };
-    this.Auth.Register(user).subscribe({
+    this.authService.Register(user).subscribe({
       next: (res: any) => {
         this.registerForm.reset();
         this.registerMessage = res.message;
+        this.authService.saveToken(res.token);
+        this.authService.saveRefreshToken(res.refreshToken);
+        this.router.navigate(['/home']);
+
       },
       error: (err) => {
         this.registerMessage = err.error;

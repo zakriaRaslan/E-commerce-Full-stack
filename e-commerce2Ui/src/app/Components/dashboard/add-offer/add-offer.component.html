@@ -1,0 +1,94 @@
+<div class="outer">
+  <div class="row">
+    <div class="mx-3">
+      <h3
+        class="title d-flex align-items-center justify-content-center fw-bold"
+      >
+        Add Offer
+      </h3>
+    </div>
+    <div class="row">
+      <div class="offer-form d-flex align-items-center justify-content-center">
+        <form class="w-50 main-form" [formGroup]="addOfferForm">
+          <div class="form-group my-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              class="form-control"
+              formControlName="title"
+              placeholder="Offer Title"
+            />
+            <div
+              class="form-text text-danger"
+              *ngIf="Title.errors?.['required'] && (Title.touched || Title.dirty)"
+            >
+              *This Field Is Required
+            </div>
+            <div
+              class="form-text text-danger"
+              *ngIf="Title.errors?.['maxlength'] && (Title.touched || Title.dirty)"
+            >
+              *Max Length Is 100
+            </div>
+            <div
+              class="form-text text-danger"
+              *ngIf="Title.errors?.['minlength'] && (Title.touched || Title.dirty)"
+            >
+              *Min Length Is 3
+            </div>
+          </div>
+          <div class="form-group my-3">
+            <label for="discount" class="form-label">Discount</label>
+            <input
+              type="number"
+              id="discount"
+              name="discount"
+              class="form-control"
+              placeholder="Discount Amount From 1 to 99"
+              formControlName="discount"
+              max="99"
+              min="1"
+            />
+            <div
+              class="form-text text-danger"
+              *ngIf="Discount.errors?.['required'] && (Discount.touched || Discount.dirty)"
+            >
+              *This Field Is Required
+            </div>
+            <div
+              class="form-text text-danger"
+              *ngIf="Discount.errors?.['maxlength'] && (Discount.touched || Discount.dirty)"
+            >
+              *Max Length Is 2
+            </div>
+            <div
+              class="form-text text-danger"
+              *ngIf="Discount.errors?.['max'] && (Discount.touched || Discount.dirty)"
+            >
+              *Max Value Is 99
+            </div>
+            <div
+              class="form-text text-danger"
+              *ngIf="Discount.errors?.['min'] && (Discount.touched || Discount.dirty)"
+            >
+              *Min Value Is 1
+            </div>
+          </div>
+          <div class="fs-4 {{addOfferMessageClass}} text-center">{{addOfferMessage}}</div>
+          <div class="d-flex align-items-center justify-content-center">
+            <button
+              type="submit"
+              class="btn btn-outline-success w-50 mt-3"
+              [disabled]="addOfferForm.invalid"
+              (click)="AddOffer()"
+            >
+              Add Form
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

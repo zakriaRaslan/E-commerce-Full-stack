@@ -1,8 +1,9 @@
+<!-- <div class="container">
 <form [formGroup]="loginForm" (ngSubmit)="login()">
 <div class="mb-3">
  <label for="email"   class="form-label">Email</label>
  <input type="email" id="email"  placeholder="Input Email" class="form-control" formControlName="email">
- <!-- Errors -->
+
  <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">Email Is Required</div>
  <div class="form-text text-danger" *ngIf="Email.errors?.['email'] && (Email.dirty || Email.touched)">Email Is Invalid</div>
 </div>
@@ -17,9 +18,17 @@
       </div>
 
     </div>
-  <!-- Errors -->
-      <div class="form-text text-danger" *ngIf="Password.errors?.['required'] && (Password.dirty || Password.touched)">Password Is Required</div>
 
+      <div class="form-text text-danger" *ngIf="Password.errors?.['required'] && (Password.dirty || Password.touched)">Password Is Required</div>
+</div>
+<div class="form-inline fr mt-4">
+  <a
+    id="forget"
+    class="div.form-inline.fr.mt-4"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    >Forget Password?</a
+  >
 </div>
 <div>
   <button type="submit" [disabled]="loginForm.invalid" class="d-block mx-auto btn btn-outline-primary">Login</button>
@@ -28,3 +37,100 @@
  {{loginMessage}}
 </div>
 </form>
+</div> -->
+
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="w-50 form-panel">
+        <div class="panel border bg-white">
+          <div class="panel-heading">
+            <h3 class="pt-3 font-weight-bold title fs-3">Login</h3>
+          </div>
+          <div class="panel-body p-3">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <div class="mb-1">
+                <label for="email"   class="form-label">Email</label>
+             <div class="input-field p-2">
+              <input type="email" id="email"  placeholder="Input Email" formControlName="email">
+             </div>
+               <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">Email Is Required</div>
+               <div class="form-text text-danger" *ngIf="Email.errors?.['email'] && (Email.dirty || Email.touched)">Email Is Invalid</div>
+              </div>
+              <div class="mb-1">
+                    <label for="password"   class="form-label">Password</label>
+                    <div class="input-field p-2">
+                    <input
+                    [type]="passwordType"
+                      placeholder="Password"
+                      formControlName="password"
+                    />
+                    <fa-icon
+                    [icon]="eyeIcon"
+                    class="eyeIcon"
+                    (click)="togglePassword()"
+                  ></fa-icon>
+                  </div>
+                    <div class="form-text text-danger" *ngIf="Password.errors?.['required'] && (Password.dirty || Password.touched)">Password Is Required</div>
+              </div>
+              <div class="form-inline fr mt-4">
+                <a
+                  id="forget"
+                  class="div.form-inline.fr.mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#emailModal"
+                  >Forget Password?</a
+                >
+              </div>
+              <div>
+                <button type="submit" [disabled]="loginForm.invalid" class="d-block mx-auto btn btn-outline-primary w-50">Login</button>
+              </div>
+              <div class="mb-3 text-center" [ngClass]="errorMessage ?'text-danger':'text-primary'">
+               {{loginMessage}}
+              </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="emailModal"
+  tabindex="-1"
+  aria-labelledby="emailModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title fs-5" id="emailModalLabel"><span style="font-size: 25px; font-weight: 700;">Forget Your Password?</span><br>
+        <small>Please Provide Your Email We Will Send The Reset Link</small></p>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group pt-3">
+          <div class="input-field">
+            <fa-icon [icon]="userIcon" class="form-icon me-2"></fa-icon>
+        <input [(ngModel)]="resetPasswordEmail" (ngModelChange)="CheckValidEmail($event)" class="form-control" type="text" placeholder="Email">
+          </div>
+        <small *ngIf="!resetPasswordEmail" class="text-danger">*Email Is Required</small>
+        <small *ngIf="!isEmailValid && resetPasswordEmail" class="text-danger">*Email Is Invalid</small>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button id="closeBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button [disabled]="!isEmailValid" (click)="ConfirmEmail()" type="button" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

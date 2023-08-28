@@ -11,6 +11,7 @@ import { CategoryDto } from '../DashboardModels/dashboardModels';
 export class AddCategoryComponent implements OnInit {
 addCategoryForm!:FormGroup;
 formMessage:string=''
+formMessageClass:string='';
   constructor(private dashboardService:DashboardService, private fb:FormBuilder){}
 
   ngOnInit(){
@@ -27,8 +28,15 @@ AddCategory(){
       category:categoryName.toLowerCase(),
       subcategory:subcategoryName.toLowerCase(),
 }
-this.dashboardService.addCategory(categoryDto).subscribe((res)=>{
-  console.log()
+this.dashboardService.addCategory(categoryDto).subscribe({
+  next:(res)=>{
+    this.formMessageClass='text-success'
+    this.formMessage=res;
+    this.addCategoryForm.reset();
+  },error:(err)=>{
+    this.formMessageClass='text-danger'
+    this.formMessage=err.error;
+  }
 })
 }
 }

@@ -170,3 +170,26 @@ export interface UserInfo{
   address:string;
   mobile:string;
 }
+
+export interface ModifyUserDto{
+  firstName:string;
+  lastName:string;
+  userName:string;
+  email:string;
+  address:string;
+  mobile:string;
+  password:string;
+}
+
+export interface ChangePasswordDto{
+  email:string;
+  oldPassword:string;
+  newPassword:string;
+}
+
+export class ResetPasswordDto{
+  Email!:string;
+  EmailToken!:string;
+  Password!:string;
+  ConfirmPassword!:string;
+}

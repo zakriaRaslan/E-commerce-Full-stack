@@ -45,21 +45,25 @@ this.dashboardService.getAvailableOffers().subscribe((res)=>{
 })
   }
   AddProduct(){
+   let categoryIdValue:number =parseInt(this.CategoryId.value);
+   let OfferIdValue:number = parseInt(this.OfferId.value)
+   if(Number.isNaN(OfferIdValue)){
+    OfferIdValue=0;
+    }
     let addProductDto:AddProductDto={
       title : this.Title.value,
       price : this.Price.value,
       quantity : this.Quantity.value,
       imageName : this.ImageName.value,
       description : this.Description.value,
-      categoryId : parseInt(this.CategoryId.value),
-      offerId :parseInt(this.OfferId.value),
+      categoryId : categoryIdValue,
+      offerId :OfferIdValue,
     }
-    if(Number.isNaN(addProductDto.offerId)){
-    addProductDto.offerId=0;
-    }
-    this.dashboardService.addProduct(addProductDto).subscribe()
- this.addProductForm.reset();
- this.addProductMessages = 'Product Added Successfully';
+
+    this.dashboardService.addProduct(addProductDto).subscribe((res)=>{
+      this.addProductMessages = res;
+      this.addProductForm.reset();
+    })
   }
 
 // Getters Region

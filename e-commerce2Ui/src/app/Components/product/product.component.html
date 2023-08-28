@@ -23,16 +23,16 @@
       <p class="card-text description">{{ product.description }}</p>
     </div>
     <div class="card-body">
-      <h5 class="card-title text-success">
+      <h4 class="card-title text-success">
         {{
           utilityService.applyDiscount(product.price, product.offer.discount)
             | currency : "EGP"
         }}
         <span *ngIf="product.offer.discount != 0"  class="text-primary">-{{ product.offer.discount }}%</span>
-      </h5>
-      <h6 *ngIf="product.offer.discount != 0"  class="card-subtitle text-danger text-decoration-line-through">
+      </h4>
+      <h5 *ngIf="product.offer.discount != 0"  class="card-subtitle text-danger text-decoration-line-through">
         {{ product.price | currency : "EGY" }}
-      </h6>
+      </h5>
     </div>
     <!-- <div class="card-footer d-grid gap-2">
       <button

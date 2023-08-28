@@ -5,18 +5,16 @@ namespace Ecommerce.Api.Models
 {
     public class AppUser : IdentityUser
     {
-        [MaxLength(50)]
+        [Required, MaxLength(50)]
         public string FirstName { get; set; }
-        [MaxLength(50)]
+        [Required, MaxLength(50)]
         public string LastName { get; set; }
-        [MaxLength(100)]
+        [Required, MaxLength(100)]
         public string Address { get; set; }
-        [MaxLength(20)]
-        public string Mobile { get; set; }
-        [MaxLength(50)]
         public string CreatedAt { get; set; }
-        [MaxLength(50)]
         public string ModifiedAt { get; set; } = string.Empty;
         public List<RefreshToken> RefreshTokens { get; set; }
+        public string? ResetPasswordToken { get; set; }
+        public DateTime ResetPasswordTokenExpiry { get; set; }
     }
 }

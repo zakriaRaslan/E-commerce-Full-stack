@@ -85,3 +85,7 @@ D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Ecommerce.Api.staticwebassets.runtime.json
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.UI.dll
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Microsoft.Extensions.FileProviders.Embedded.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\MailKit.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\MimeKit.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\NETCore.MailKit.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\BouncyCastle.Crypto.dll

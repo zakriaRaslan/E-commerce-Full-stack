@@ -6,23 +6,40 @@ import { OrderComponent } from './Components/order/order.component';
 import { CartComponent } from './Components/cart/cart.component';
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
 import { ProductsComponent } from './Components/products/products.component';
-import { AccountSettingsComponent } from './Components/account-settings/account-settings.component';
 import { AuthGuard } from './Guards/auth.guard';
+import { LoginComponent } from './Components/login/login.component';
+import { RegisterComponent } from './Components/register/register.component';
+import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent},
-  {path:'products',component:ProductsComponent},
-  {path:'product-details',component:ProductDetailsComponent},
-  {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
-  {path:'order',component:OrderComponent,canActivate:[AuthGuard]},
-  {path:'account',component:AccountSettingsComponent , canActivate:[AuthGuard]},
-  {path:'',redirectTo:'/home',pathMatch:'full'},
-  { path: 'dashboard', loadChildren: () => import('./Components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-  {path:'**',component:PageNotFoundComponent}
+  { path: 'home', component: HomeComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'product-details', component: ProductDetailsComponent },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'reset', component: ResetPasswordComponent},
+  {
+    path: 'account',
+    loadChildren: () =>
+      import('./Components/account-settings/account-settings.module').then(
+        (m) => m.AccountSettingsModule
+      ),
+  },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./Components/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

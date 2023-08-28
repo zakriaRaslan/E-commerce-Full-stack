@@ -12,6 +12,7 @@ users:UserInfo[]=[];
 constructor(private authService:AuthService){}
 ngOnInit(){
     this.authService.GetUsersList().subscribe((res)=>{
+      console.log(res);
       this.users = res;
     })
 }

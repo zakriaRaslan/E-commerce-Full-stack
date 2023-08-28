@@ -1,4 +1,5 @@
 export interface AddProductDto{
+  productId?:number,
   title:string;
   description:string;
   price:number;
@@ -9,15 +10,23 @@ export interface AddProductDto{
 }
 
 export interface UserInfo{
+  userId:string
   firstName:string;
   lastName:string;
   userName:string;
   email:string;
   mobile:string;
   address:string;
+  roles:string[];
 }
 
 export interface CategoryDto{
   category:string;
   subcategory:string;
 }
+
+export interface OfferDto{
+  title:string;
+  discount:number;
+}
+

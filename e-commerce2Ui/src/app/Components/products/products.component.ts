@@ -26,7 +26,7 @@ export class ProductsComponent implements OnInit {
       let subcategory = params.subcategory;
       if (category && subcategory) {
         this.navigationService
-          .getProducts(category, subcategory, 10)
+          .getProducts(category, subcategory, 100)
           .subscribe((res) => {
             this.products = res;
           });

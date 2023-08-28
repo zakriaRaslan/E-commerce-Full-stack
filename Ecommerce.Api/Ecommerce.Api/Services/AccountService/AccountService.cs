@@ -26,7 +26,7 @@ namespace Ecommerce.Api.Services.AccountService
             userInfoDto.Address = user.Address;
             userInfoDto.FirstName = user.FirstName;
             userInfoDto.LastName = user.LastName;
-            userInfoDto.Mobile = user.Mobile;
+            userInfoDto.Mobile = user.PhoneNumber;
 
             return userInfoDto;
         }

@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
-import { DashboardService } from '../Services/dashboard.service';
 import { UserInfo } from '../DashboardModels/dashboardModels';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription, map, take } from 'rxjs';
+import {  Subscription,take } from 'rxjs';
 
 @Component({
   selector: 'app-user-edit',

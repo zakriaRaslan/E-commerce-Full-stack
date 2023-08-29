@@ -17,5 +17,6 @@ namespace Ecommerce.Api.Services.AuthService
         Task<string> SendResetPasswordEmailAsync(string email);
         Task<string> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);
         Task<UserInfoDto> GetUserByIdAsync(string userId);
+        Task<bool> DeleteUserAsync(string userId);
     }
 }

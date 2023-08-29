@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { AuthService } from 'src/app/Services/auth.service';
 import { CartService } from 'src/app/Services/cart.service';
+import { LoaderService } from 'src/app/Services/loader.service';
 import { OrderService } from 'src/app/Services/order.service';
 import { Cart, OrderDto, Payment, PaymentMethod, User } from 'src/app/models/model';
 
@@ -44,11 +45,13 @@ export class OrderComponent implements OnInit, OnDestroy {
     private orderService: OrderService,
     private cartService: CartService,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private loaderService:LoaderService,
   ) {}
 
   ngOnInit(): void {
     // Set Active User
+    this.loaderService.ShowLoader();
     this.activeUser = this.authService.GetUser();
     // Get Selected PaymentMethod
     this.selectedPaymentMethod.valueChanges.subscribe((res: any) => {
@@ -68,13 +71,17 @@ export class OrderComponent implements OnInit, OnDestroy {
     // Get User Cart
     this.subscription = this.cartService
       .getActiveCart(this.activeUser.userId)
-      .subscribe((res) => {
+      .subscribe({
+        next:(res)=>{
         this.userCart = res;
         for(let cartItems of this.userCart.cartItems){
           this.itemsCount += cartItems.salesProduct.quantity;
         }
         // set UserPaymentInfo
         this.cartService.CalculatePayment(this.userCart, this.userPaymentInfo);
+      },complete:()=>{
+        this.loaderService.HideLoader();
+      }
       });
   }
 
@@ -84,7 +91,6 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   placeOrder() {
-
     this.displaySpinner = true;
     let isPaymentSuccessfully = this.payMoney();
     if (!isPaymentSuccessfully) {

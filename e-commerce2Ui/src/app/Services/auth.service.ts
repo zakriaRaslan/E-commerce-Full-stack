@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { AuthModel, ChangePasswordDto, LoginModel, RegisterModel, ResetPasswordDto, User, UserInfo } from '../models/model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,9 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private jwt: JwtHelperService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router:Router,
+    private cartService:CartService
   ) {}
 
   //To Use JwtHelperService => npm instal @auth0/angular-jwt
@@ -43,6 +47,8 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    this.router.navigate(['login'])
+    this.cartService.changeCart.closed
   }
 
   RenewToken(refreshToken: string) {

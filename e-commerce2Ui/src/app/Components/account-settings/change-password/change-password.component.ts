@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmPasswordValidator } from 'src/app/Custom Validators/confirm-password.validator';
 import { AuthService } from 'src/app/Services/auth.service';
+import { LoaderService } from 'src/app/Services/loader.service';
 import { ChangePasswordDto} from 'src/app/models/model';
 
 @Component({
@@ -20,8 +20,8 @@ export class ChangePasswordComponent {
   formMessageClass:string='';
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private authService:AuthService,
+    private loaderService:LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +40,7 @@ export class ChangePasswordComponent {
   }
 
   ChangePassword() {
+    this.loaderService.ShowLoader()
     var changePasswordModel:ChangePasswordDto = {
       email:this.authService.GetUser().email,
       oldPassword:this.OldPassword.value,
@@ -55,6 +56,8 @@ export class ChangePasswordComponent {
       },error:(err)=>{
         this.formMessageClass='text-danger';
         this.formMessage=err.error;
+      },complete:()=>{
+        this.loaderService.HideLoader();
       }
     })
 }

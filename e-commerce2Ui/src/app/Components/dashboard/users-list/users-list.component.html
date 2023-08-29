@@ -29,7 +29,7 @@
         <td>{{user.mobile | titlecase}}</td>
         <td>{{user.roles}}</td>
         <td><button class="btn btn-primary" [routerLink]="['/dashboard/user-edit',user.userId]" style="width: 70px;">Edit</button></td>
-        <td><button class="btn btn-danger" [routerLink]="['/dashboard/user-delete',user.userId]" style="width: 70px;">Delete</button></td>
+        <td><button class="btn btn-danger" (click)="DeleteUser(user.userId)" style="width: 70px;">Delete</button></td>
       </tr>
     </tbody>
   </table>

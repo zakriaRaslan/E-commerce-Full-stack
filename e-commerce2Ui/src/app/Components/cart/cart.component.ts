@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Services/auth.service';
 import { CartService } from 'src/app/Services/cart.service';
+import { LoaderService } from 'src/app/Services/loader.service';
 import { UtilityService } from 'src/app/Services/utility.service';
 import { Cart, Payment } from 'src/app/models/model';
 
@@ -10,7 +11,8 @@ import { Cart, Payment } from 'src/app/models/model';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent implements OnInit, OnDestroy {
+export class CartComponent implements OnInit , AfterViewInit {
+  itemsMessage:boolean=false
   cart: Cart = {
     id: 0,
     User: this.authService.GetUser(),
@@ -40,37 +42,48 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private authService: AuthService,
-    public utilityService: UtilityService
+    public utilityService: UtilityService,
+    private loaderService:LoaderService
   ) {}
 
   ngOnInit(): void {
+    this.loaderService.ShowLoader();
     let userId = this.authService.GetUser().userId;
      // Get user Previous Carts
-    this.subscription =  this.cartService
+   this.cartService
     .getPreviousUserCarts(userId)
-    .subscribe((res) => {
+    .subscribe({
+      next:(res)=>{
     this.previousUserCarts = res;
      console.log(this.previousUserCarts);
      return this.previousUserCarts;
-
+    },complete:()=>{
+      this.loaderService.HideLoader()
+    }
     }
     );
     // get User Cart
-    this.subscription = this.cartService
+this.loaderService.ShowLoader();
+ this.cartService
       .getActiveCart(userId)
-      .subscribe((res) => {
+      .subscribe({
+        next:(res)=>{
         this.cart = res;
         if (this.cart.cartItems.length == 0) {
+          this.itemsMessage=true;
           return;
         }
         for (let cartItem of this.cart.cartItems) {
           this.totalProductAmount += cartItem.quantity;
         }
         this.cartService.CalculatePayment(this.cart, this.userPaymentInfo);
+      },complete:()=>{
+        this.loaderService.HideLoader();
+      }
       });
   }
+ngAfterViewInit(): void {
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+}
+
 }

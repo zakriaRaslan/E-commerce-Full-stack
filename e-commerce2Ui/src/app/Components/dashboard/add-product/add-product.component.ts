@@ -22,6 +22,7 @@ messageClass:string=''
   constructor(private dashboardService:DashboardService, private fb:FormBuilder){}
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.addProductForm= this.fb.group({
       title:['',Validators.required],
       price:['',Validators.required],

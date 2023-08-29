@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoaderService } from './Services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'e-commerce2Ui';
+  constructor(private loaderService:LoaderService){}
+  ShowLoader$=this.loaderService.LoadingActin$
 }

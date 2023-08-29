@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Api.Models.Dto;
+using Ecommerce.Api.Services.AuthService;
 using Ecommerce.Api.Services.DashboardService;
 using Ecommerce.Api.Services.ProductCategoryService;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@ namespace Ecommerce.Api.Controllers
     {
         private readonly IDashboardService _dashboardService;
         private readonly IDataAccess _dataAccess;
+        private readonly IAuthService _authService;
 
-        public DashboardController(IDashboardService dashboardService, IDataAccess dataAccess)
+        public DashboardController(IDashboardService dashboardService, IDataAccess dataAccess, IAuthService authService)
         {
             _dashboardService = dashboardService;
             _dataAccess = dataAccess;
+            _authService = authService;
         }
 
         [HttpGet("get-categories")]
@@ -105,6 +108,21 @@ namespace Ecommerce.Api.Controllers
                 return BadRequest(new { message = "Something Went Wrong" });
             }
             return Ok(new { message = "Product Modified Successfully" });
+        }
+
+        [HttpDelete("delete-user/{userId}")]
+        public async Task<IActionResult> DeleteUserAsync(string userId)
+        {
+            if (userId == null)
+            {
+                return BadRequest(new { message = "UserId Can Not Be Null" });
+            }
+            var result = await this._authService.DeleteUserAsync(userId);
+            if (!result)
+            {
+                return NotFound(new { message = "User Not Found" });
+            }
+            return Ok(new { message = "User Deleted Successfully" });
         }
     }
 }

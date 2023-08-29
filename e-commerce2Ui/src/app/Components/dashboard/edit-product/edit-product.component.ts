@@ -35,7 +35,6 @@ messageClass:string=''
     console.log(this.product);
 
     this.ProductForm=this.fb.group({
-      fake:[{value:'FAKE FIELD',disabled:true}],
       title:[this.product?.title,Validators.required],
       price:[this.product?.price,Validators.required],
       quantity:[this.product?.quantity,Validators.required],

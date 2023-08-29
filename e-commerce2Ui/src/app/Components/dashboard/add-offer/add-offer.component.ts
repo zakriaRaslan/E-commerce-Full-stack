@@ -24,6 +24,8 @@ addOfferMessageClass:string='';
   }
 
 AddOffer(){
+  window.scroll(0,0);
+
   var model:OfferDto={
     title:this.Title.value,
     discount:this.Discount.value

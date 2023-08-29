@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { CartService } from 'src/app/Services/cart.service';
+import { LoaderService } from 'src/app/Services/loader.service';
 import { NavigationService } from 'src/app/Services/navigation.service';
 import { ReviewService } from 'src/app/Services/review.service';
 import { UtilityService } from 'src/app/Services/utility.service';
@@ -19,7 +20,7 @@ import {
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css'],
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit ,AfterViewInit {
   imgIndex: number = 1;
   product!: Product;
   ProductAllowedQuantity: number = 0;
@@ -39,21 +40,29 @@ export class ProductDetailsComponent implements OnInit {
     public utilityService: UtilityService,
     public authService: AuthService,
     private reviewService: ReviewService,
-    public cartService: CartService
+    public cartService: CartService,
+    private loaderService:LoaderService,
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params: any) => {
-      let id = params.id;
-      this.navigationService.getProductById(id).subscribe((res) => {
-        this.product = res;
-        this.ProductAllowedQuantity = res.quantity;
-        this.GetAllReviews();
-      });
-    });
+    this.loaderService.ShowLoader();
+    this.GetProduct();
   }
-
+ngAfterViewInit(): void {
+    this.loaderService.HideLoader()
+}
+GetProduct(){
+  this.activatedRoute.queryParams.subscribe((params: any) => {
+    let id = params.id;
+    this.navigationService.getProductById(id).subscribe((res) => {
+      this.product = res;
+      this.ProductAllowedQuantity = res.quantity;
+      this.GetAllReviews();
+    });
+  });
+}
   SaveReview() {
+  this.loaderService.ShowLoader();
     let reviewValue = this.reviewControl.value;
     if (reviewValue === '' || reviewValue == null) {
       this.emptyReviewError = true;
@@ -77,7 +86,9 @@ export class ProductDetailsComponent implements OnInit {
       },
       error: (err) => {
         this.errorMessage = err.error;
-      },
+      },complete:()=>{
+        this.loaderService.HideLoader();
+      }
     });
   }
   clearMessages() {
@@ -88,17 +99,23 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   GetAllReviews() {
+    this.loaderService.ShowLoader();
     this.reviews = [];
     this.reviewService
       .GetProductReviews(this.product.productId)
-      .subscribe((res: any) => {
+      .subscribe({
+        next:(res:any)=>{
         for (let review of res) {
           this.reviews.push(review);
         }
+      },complete:()=>{
+        this.loaderService.HideLoader();
+      }
       });
   }
 
   AddToCart() {
+    this.loaderService.ShowLoader();
     this.AddToCartMessage ="";
     if(this.ProductQuantity.value ==null || parseInt(this.ProductQuantity.value)<= 0 || this.ProductQuantity.value==""){
       this.AddToCartClass = 'text-danger'
@@ -124,6 +141,10 @@ export class ProductDetailsComponent implements OnInit {
     error : (err) =>{
       this.AddToCartClass = 'text-danger';
       this.AddToCartMessage = 'Some Thing Went Wrong';
+    },
+    complete:()=>{
+      this.GetProduct();
+      this.loaderService.HideLoader();
     }
    })
 

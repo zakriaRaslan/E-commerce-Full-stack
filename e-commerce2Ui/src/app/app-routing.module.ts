@@ -10,8 +10,10 @@ import { AuthGuard } from './Guards/auth.guard';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
+import { AdminGuard } from './Guards/admin.guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'product-details', component: ProductDetailsComponent },
@@ -21,15 +23,14 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'reset', component: ResetPasswordComponent},
   {
-    path: 'account',
+    path: 'account',canActivate:[AuthGuard],
     loadChildren: () =>
       import('./Components/account-settings/account-settings.module').then(
         (m) => m.AccountSettingsModule
       ),
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
-    path: 'dashboard',
+    path: 'dashboard',canActivate:[AdminGuard],canActivateChild:[AdminGuard],
     loadChildren: () =>
       import('./Components/dashboard/dashboard.module').then(
         (m) => m.DashboardModule

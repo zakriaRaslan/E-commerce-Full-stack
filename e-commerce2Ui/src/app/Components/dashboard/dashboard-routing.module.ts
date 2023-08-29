@@ -17,6 +17,8 @@ const routes: Routes = [{ path: '', component: DashboardComponent,children:[
   {path:'add-offer',component:AddOfferComponent},
   {path:'user-edit/:userId',component:UserEditComponent},
   {path:'edit-product/:productId',component:EditProductComponent},
+  {path:'delete-user/:userId',component:EditProductComponent},
+
 ] }];
 
 @NgModule({

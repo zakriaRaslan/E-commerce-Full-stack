@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { RegisterModel, User } from 'src/app/models/model';
 import{faEye,faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/Services/loader.service';
 
 @Component({
   selector: 'app-register',
@@ -23,8 +24,9 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   invalidConfirmPassword: boolean = false;
   registerMessage: string = '';
-  constructor(private fb: FormBuilder, private authService: AuthService,private router:Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService,private router:Router,private loaderService:LoaderService) {}
   ngOnInit(): void {
+    window.scroll(0,0);
     this.registerForm = this.fb.group(
       {
         firstName: [
@@ -73,6 +75,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.loaderService.ShowLoader();
     let user: RegisterModel = {
       firstName: this.FirstName.value,
       lastName: this.LastName.value,
@@ -94,6 +97,9 @@ export class RegisterComponent implements OnInit {
       error: (err) => {
         this.registerMessage = err.error;
       },
+      complete:()=>{
+        this.loaderService.HideLoader();
+      }
     });
   }
 

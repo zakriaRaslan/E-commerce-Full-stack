@@ -4,6 +4,9 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { LoginModel } from 'src/app/models/model';
 import{faEye,faEyeSlash, faLock, faUser} from '@fortawesome/free-solid-svg-icons'
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/Services/cart.service';
+import { LoaderService } from 'src/app/Services/loader.service';
+import { delay } from 'rxjs';
 
 
 @Component({
@@ -23,8 +26,9 @@ export class LoginComponent implements OnInit {
   public resetPasswordEmail!: string;
   public isEmailValid!: boolean;
 
-  constructor(private fb: FormBuilder,private authService:AuthService ,private router:Router) {}
+  constructor(private fb: FormBuilder,private authService:AuthService ,private router:Router,private cartService:CartService,private loaderService:LoaderService) {}
   ngOnInit(): void {
+    window.scroll(0,0);
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email],],
       password: ['', [Validators.required],],
@@ -32,6 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    this.loaderService.ShowLoader();
     let user:LoginModel={
       email:this.Email.value,
       password:this.Password.value
@@ -48,9 +53,12 @@ export class LoginComponent implements OnInit {
       error:(err)=>{
         this.errorMessage=true;
         this.loginMessage=err.error;
-
+      },
+      complete:()=>{
+        this.loaderService.HideLoader();
       }
     })
+    this.cartService.getActiveCart(this.authService.GetUser().userId)
   }
 
   togglePassword() {

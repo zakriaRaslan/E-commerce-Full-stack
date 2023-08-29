@@ -379,7 +379,16 @@ namespace Ecommerce.Api.Services.AuthService
             return userInfo;
         }
 
-
+        public async Task<bool> DeleteUserAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+                return true;
+            }
+            return false;
+        }
         private async Task<JwtSecurityToken> GenerateJwtTokenAsync(AppUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);

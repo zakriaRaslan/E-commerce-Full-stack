@@ -97,7 +97,7 @@ namespace Ecommerce.Api.Services.CartService
 
         public async Task<Cart> GetActiveCartAsync(string userId)
         {
-            var cart = await _context.ShoppingCart.Where(x => x.IsOrdered == false)
+            var cart = await _context.ShoppingCart.Where(x => x.IsOrdered == false && x.UserId == userId)
                 .Include(x => x.CartItems).ThenInclude(x => x.SalesProduct)
                 .Include(x => x.User).FirstOrDefaultAsync();
             if (cart == null)

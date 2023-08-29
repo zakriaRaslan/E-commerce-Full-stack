@@ -144,16 +144,16 @@
           Save Review
         </button>
         <div>
-          <h6 class="text-danger mt-4" *ngIf="LoggedInError">
+          <h4 class="text-danger mt-4" *ngIf="LoggedInError">
             Login First, Then Enter The Review
-          </h6>
-          <h6 class="text-danger" *ngIf="emptyReviewError">
+          </h4>
+          <h4 class="text-danger" *ngIf="emptyReviewError">
             Review Can Not Be Empty!
-          </h6>
-          <h6 class="text-success" *ngIf="reviewSaved">
+          </h4>
+          <h4 class="text-success" *ngIf="reviewSaved">
             Review Saved Successfully
-          </h6>
-          <h6 class="text-danger">{{ errorMessage }}</h6>
+          </h4>
+          <h4 class="text-danger">{{ errorMessage }}</h4>
         </div>
       </div>
     </div>

@@ -30,7 +30,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     AddOfferComponent,
     UserEditComponent,
     ProductsListComponent,
-    EditProductComponent
+    EditProductComponent,
+
   ],
   imports: [
     CommonModule,

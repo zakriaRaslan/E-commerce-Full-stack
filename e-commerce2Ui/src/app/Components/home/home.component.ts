@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs';
+import { LoaderService } from 'src/app/Services/loader.service';
 import { SuggestedProduct } from 'src/app/models/model';
 
 @Component({
@@ -7,7 +9,7 @@ import { SuggestedProduct } from 'src/app/models/model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent  {
+export class HomeComponent implements OnInit ,AfterViewInit {
 suggestedProducts:SuggestedProduct[]=[
   {
     bannerImage:'Banner/Banner_Mobile.png',
@@ -43,9 +45,17 @@ suggestedProducts:SuggestedProduct[]=[
   },
 ]
 
-constructor(private router:Router){}
+constructor(private router:Router , private LoaderService:LoaderService){}
+
 toProducts(category:string , subcategory:string){
 this.router.navigateByUrl(`products?category=${category}&subcategory=${subcategory}`);
 window.scroll(0,0);
+}
+
+ngOnInit(): void {
+this.LoaderService.ShowLoader();
+}
+ngAfterViewInit(): void {
+    this.LoaderService.HideLoader();
 }
 }

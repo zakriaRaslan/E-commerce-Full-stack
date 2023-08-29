@@ -24,6 +24,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptor } from './Interceptors/Interceptors';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
+import { LoaderComponent } from './Components/loader/loader.component';
 
 
 
@@ -46,6 +47,7 @@ import { ResetPasswordComponent } from './Components/reset-password/reset-passwo
     LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

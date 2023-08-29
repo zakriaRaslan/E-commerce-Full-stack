@@ -38,5 +38,7 @@ BaseUrl:string ='https://localhost:7197/api/Dashboard/'
   ModifyProduct(product:AddProductDto){
     return this.http.patch(`${this.BaseUrl}edit-product`,product)
   }
-
+DeleteUser(userId:string){
+  return this.http.delete(`${this.BaseUrl}delete-user/${userId}`);
+}
 }

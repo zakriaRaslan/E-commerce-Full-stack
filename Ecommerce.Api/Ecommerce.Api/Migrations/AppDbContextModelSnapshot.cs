@@ -139,7 +139,7 @@ namespace Ecommerce.Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingCart");
+                    b.ToTable("ShoppingCart", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.CartItems", b =>
@@ -171,7 +171,7 @@ namespace Ecommerce.Api.Migrations
 
                     b.HasIndex("SalesProductId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.Offer", b =>
@@ -224,7 +224,7 @@ namespace Ecommerce.Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.Payment", b =>
@@ -262,7 +262,7 @@ namespace Ecommerce.Api.Migrations
 
                     b.HasIndex("PaymentMethodId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.PaymentMethod", b =>
@@ -291,7 +291,7 @@ namespace Ecommerce.Api.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PaymentMethods");
+                    b.ToTable("PaymentMethods", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Api.Models.Product", b =>
@@ -428,7 +428,7 @@ namespace Ecommerce.Api.Migrations
 
                     b.HasKey("SalesProductId");
 
-                    b.ToTable("SalesProducts");
+                    b.ToTable("SalesProducts", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -566,7 +566,7 @@ namespace Ecommerce.Api.Migrations
 
             modelBuilder.Entity("Ecommerce.Api.Models.AppUser", b =>
                 {
-                    b.OwnsMany("Ecommerce.Api.Models.RefreshToken", "RefreshTokens", b1 =>
+                    b.OwnsMany("Ecommerce.Api.Models.AppUser.RefreshTokens#Ecommerce.Api.Models.RefreshToken", "RefreshTokens", b1 =>
                         {
                             b1.Property<string>("AppUserId")
                                 .HasColumnType("nvarchar(450)");

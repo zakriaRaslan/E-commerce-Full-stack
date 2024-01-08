@@ -89,3 +89,10 @@ D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\MimeKit.dll
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\NETCore.MailKit.dll
 D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\BouncyCastle.Crypto.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\System.Web.Cors.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\System.Net.Http.Formatting.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\System.Web.Http.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\System.Web.Http.Cors.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+D:\courses\0my_projects\Github-projects\e-commerce2\Ecommerce.Api\Ecommerce.Api\obj\Debug\net7.0\Ecommerce.Api.sourcelink.json

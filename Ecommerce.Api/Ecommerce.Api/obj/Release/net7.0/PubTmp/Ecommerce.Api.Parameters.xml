@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="zakaria108-001-site1" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\courses\\0my_projects\\Github-projects\\e-commerce2\\Ecommerce\.Api\\Ecommerce\.Api\\obj\\Release\\net7\.0\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="Ecommerce.Api.Data.AppDbContext" description="" value="Data Source=SQL8006.site4now.net;Initial Catalog=db_a9e587_ecommerce;User Id=db_a9e587_ecommerce_admin;Password=Raslan1081998" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\courses\\0my_projects\\Github-projects\\e-commerce2\\Ecommerce\.Api\\Ecommerce\.Api\\obj\\Release\\net7\.0\\PubTmp\\EFSQLScripts\\Ecommerce\.Api\.Data\.AppDbContext\.sql$" />
+  </parameter>
+</parameters>

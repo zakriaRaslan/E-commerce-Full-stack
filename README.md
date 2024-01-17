@@ -1,2 +1,2 @@
 # e-commerce2
-Simple E-Commerce Project
+This is a fullstack e-commerce project used Angular framework in front-end and Asp.Net Api in back-end 

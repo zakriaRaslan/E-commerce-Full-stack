@@ -13,8 +13,6 @@ namespace Ecommerce.Api.Services.ProductCategoryService
             _context = context;
         }
 
-
-
         public List<ProductCategory> GetProductCategories() => _context.productCategories.ToList();
         public Offer GetOffer(int id)
         {

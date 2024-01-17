@@ -1,7 +1,9 @@
 <!-- Grid View -->
 <div class="grid-view" *ngIf="view == 'grid'">
   <div class="card text-center">
-    <div class="card-header fw-bold fs-5 text-success">{{product.category.subcategory | titlecase}}</div>
+    <div class="card-header fw-bold fs-5 text-success">
+      {{ product.category.subcategory | titlecase }}
+    </div>
     <div
       class="overflow-hidden d-flex justify-content-center align-items-center"
     >
@@ -15,12 +17,14 @@
         [productId]="product.productId"
       />
     </div>
-    <div class="card-body">
+    <div class="card-body overflow-hidden">
       <h5 class="card-title title">{{ product.title }}</h5>
       <h6 class="card-subtitle my-2 text-primary">
         {{ product.quantity }} Products Are Available
       </h6>
-      <p class="card-text description">{{ product.description }}</p>
+      <p class="card-text description">
+        {{ product.description }}
+      </p>
     </div>
     <div class="card-body">
       <h4 class="card-title text-success">
@@ -28,9 +32,14 @@
           utilityService.applyDiscount(product.price, product.offer.discount)
             | currency : "EGP"
         }}
-        <span *ngIf="product.offer.discount != 0"  class="text-primary">-{{ product.offer.discount }}%</span>
+        <span *ngIf="product.offer.discount != 0" class="text-primary"
+          >-{{ product.offer.discount }}%</span
+        >
       </h4>
-      <h5 *ngIf="product.offer.discount != 0"  class="card-subtitle text-danger text-decoration-line-through">
+      <h5
+        *ngIf="product.offer.discount != 0"
+        class="card-subtitle text-danger text-decoration-line-through"
+      >
         {{ product.price | currency : "EGY" }}
       </h5>
     </div>
@@ -86,9 +95,14 @@
                 product.offer.discount
               ) | currency : "EGY"
             }}
-            <span *ngIf="product.offer.discount != 0" class="text-primary">-{{ product.offer.discount }}%</span>
+            <span *ngIf="product.offer.discount != 0" class="text-primary"
+              >-{{ product.offer.discount }}%</span
+            >
           </h2>
-          <h5 *ngIf="product.offer.discount != 0" class="card-subtitle text-danger text-decoration-line-through">
+          <h5
+            *ngIf="product.offer.discount != 0"
+            class="card-subtitle text-danger text-decoration-line-through"
+          >
             {{ product.price | currency : "EGY" }}
           </h5>
         </div>
@@ -138,15 +152,24 @@
                 CartProduct.discount
               ) | currency : "EGY"
             }}
-            <br>
-            <span class="text-primary">Product Amount ({{CartProduct.quantity}})</span>
+            <br />
+            <span class="text-primary"
+              >Product Amount ({{ CartProduct.quantity }})</span
+            >
           </h5>
-          <h6 *ngIf="CartProduct.discount != 0" class="card-subtitle text-danger text-decoration-line-through">
+          <h6
+            *ngIf="CartProduct.discount != 0"
+            class="card-subtitle text-danger text-decoration-line-through"
+          >
             {{ CartProduct.price | currency : "EGY" }}
           </h6>
         </div>
         <div class="card-footer text-muted d-grid gap-2">
-          <button type="button" class="btn btn-outline-danger" (click)="RemoveFromCart(CartProduct.cartItemsId)" >
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="RemoveFromCart(CartProduct.cartItemsId)"
+          >
             Remove From Cart
           </button>
         </div>

@@ -1,59 +1,59 @@
-:host{
+:host {
   display: block;
   height: max-content;
   overflow: hidden;
   border-radius: 1rem;
-  box-shadow: 0px 0px 0.75rem rgba(0, 0, 0,0.3);
+  box-shadow: 0px 0px 0.75rem rgba(0, 0, 0, 0.3);
   transition: transform 200ms ease-in-out;
 }
-:host:hover{
+:host:hover {
   transform: scale(1.03);
 }
-img{
+img {
   cursor: pointer;
   transition: transform 100ms ease-in;
 }
-img:hover{
+img:hover {
   transform: scale(1.05);
 }
-.grid-view{
+.grid-view {
   height: fit-content;
 }
-.list-view{
+.list-view {
   height: fit-content;
 }
 
 .grid-view .description,
-.grid-view .title{
-  height: 50px;
+.grid-view .title {
+  height: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-img{
-max-height: 400px;
+img {
+  max-height: 400px;
 }
-.grid-view{
+.grid-view {
   min-height: 750px;
 }
 
-.list-view .description{
+.list-view .description {
   max-height: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.list-view .title{
+.list-view .title {
   max-height: 50px;
   overflow: hidden;
 }
 
-.cart-item-view .title{
+.cart-item-view .title {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.cart-item-view{
+.cart-item-view {
   min-height: 350px;
   max-height: 400px;
 }
